@@ -32,7 +32,7 @@ class Person {
 		$this->id = $value;
 		$userDetailsQ = $db->prepare('SELECT p.name, p.email, l.id as linkedin_id, f.id as facebook_id, t.id as twitter_id FROM person p LEFT JOIN linkedin l ON p.id = l.person_id LEFT JOIN facebook f ON p.id = f.person_id LEFT JOIN twitter t ON p.id = t.person_id WHERE p.id = :id');
 		$userDetailsQ->execute(array(':id' => $value));
-		$userDetails = $userDetailsQ->fetch(PDO::FETCHASSOC);
+		$userDetails = $userDetailsQ->fetch(PDO::FETCH_ASSOC);
 		if (empty($userDetails)) {
 			return false;
 		}
@@ -48,7 +48,7 @@ class Person {
 		$this->facebookId = $value;
 		$userDetailsQ = $db->prepare('SELECT p.id, p.name, p.email, l.id as linkedin_id, t.id as twitter_id FROM facebook f, person p LEFT JOIN linkedin l ON p.id = l.person_id LEFT JOIN twitter t ON p.id = t.person_id WHERE p.id = f.person_id AND f.id = :facebook_id');
 		$userDetailsQ->execute(array(':facebook_id' => $value));
-		$userDetails = $userDetailsQ->fetch(PDO::FETCHASSOC);
+		$userDetails = $userDetailsQ->fetch(PDO::FETCH_ASSOC);
 		if (empty($userDetails)) {
 			return false;
 		}
@@ -64,7 +64,7 @@ class Person {
 		$this->linkedInId = $value;
 		$userDetailsQ = $db->prepare('SELECT p.id, p.name, p.email, f.id as facebook_id, t.id as twitter_id FROM linkedin l, person p LEFT JOIN facebook f ON p.id = f.person_id LEFT JOIN twitter t ON p.id = t.person_id WHERE p.id = l.person_id AND l.id = :linkedin_id');
 		$userDetailsQ->execute(array(':linkedin_id' => $value));
-		$userDetails = $userDetailsQ->fetch(PDO::FETCHASSOC);
+		$userDetails = $userDetailsQ->fetch(PDO::FETCH_ASSOC);
 		if (empty($userDetails)) {
 			return false;
 		}
@@ -80,7 +80,7 @@ class Person {
 		$this->twitterId = $value;
 		$userDetailsQ = $db->prepare('SELECT p.id, p.name, p.email, f.id as facebook_id, l.id as linkedin_id FROM twitter t, person p LEFT JOIN facebook f ON p.id = f.person_id LEFT JOIN linkedin l ON p.id = l.person_id WHERE p.id = t.person_id AND t.id = :twitter_id');
 		$userDetailsQ->execute(array(':twitter_id' => $value));
-		$userDetails = $userDetailsQ->fetch(PDO::FETCHASSOC);
+		$userDetails = $userDetailsQ->fetch(PDO::FETCH_ASSOC);
 		if (empty($userDetails)) {
 			return false;
 		}
@@ -99,7 +99,7 @@ class Person {
 			$db = Database::getInstance();
 			$userDetailsQ = $db->prepare('SELECT picture_url FROM temp_linkedin WHERE linkedin_id = :linkedin_id');
 			$userDetailsQ->execute(array(':linkedin_id' => $this->linkedInId));
-			$userDetails = $userDetailsQ->fetch(PDO::FETCHASSOC);
+			$userDetails = $userDetailsQ->fetch(PDO::FETCH_ASSOC);
 			if (!empty($userDetails['picture_url'])) {
 				$this->linkedInPicture = $userDetails['picture_url'];
 			}
@@ -141,7 +141,7 @@ class Person {
 		$db = Database::getInstance();
 		$userDetailsQ = $db->prepare('SELECT picture_url, screen_name, protected FROM temp_twitter WHERE twitter_id = :twitter_id');
 		$userDetailsQ->execute(array(':twitter_id' => $this->twitterId));
-		$userDetails = $userDetailsQ->fetch(PDO::FETCHASSOC);
+		$userDetails = $userDetailsQ->fetch(PDO::FETCH_ASSOC);
 		if (!empty($userDetails['picture_url'])) {
 			$this->twitterPicture = $userDetails['picture_url'];
 		}
