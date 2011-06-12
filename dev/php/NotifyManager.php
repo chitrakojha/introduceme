@@ -10,6 +10,8 @@ require_once 'php/clients/linkedinOAuth.php';
 require_once 'php/clients/bitly.php';
 require_once 'php/clients/twitterOAuth.php';
 require_once 'php/clients/ses.php';
+require_once 'php/ui/Top.php';
+require_once 'php/ui/Bottom.php';
 
 
 /**
@@ -130,7 +132,7 @@ class NotifyManager {
 	}
 
 	public function publishToFacebook() {
-		$this->facebookLoginUrl = SessionManager::getInstance()->getFacebook()->getLoginUrl(array('redirect_uri' => APP_URL.'/'.Content::l().'/login/facebookcallback/en/send-introduction/', 'req_perms' => 'publish_stream'));
+		$this->facebookLoginUrl = SessionManager::getInstance()->getFacebook()->getLoginUrl(array('redirect_uri' => APP_URL.'/'.Content::l().'/login/facebookcallback/'.Content::l().'/send-introduction/', 'scope' => 'publish_stream'));
 		$output = '<h1>'.Content::c()->introduce->one_more_thing->title.'</h1><p class="desc">'.
 			str_replace('INTRODUCEE_NAME', $this->introducee->getName(),
 			str_replace('SOCIAL_NETWORK_NAME', 'Facebook', Content::c()->introduce->one_more_thing->body)).

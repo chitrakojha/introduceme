@@ -28,7 +28,7 @@ class PageIndex {
 			$this->userDetails = $userDetailsQ->fetch(PDO::FETCH_ASSOC);
 		}
 
-		$this->facebookLoginUrl = SessionManager::getInstance()->getFacebook()->getLoginUrl(array('redirect_uri' => APP_URL.'/'.Content::l().'/login/facebookcallback/', 'req_perms' => 'publish_stream, offline_access'));
+		$this->facebookLoginUrl = SessionManager::getInstance()->getFacebook()->getLoginUrl(array('redirect_uri' => APP_URL.'/'.Content::l().'/login/facebookcallback/', 'scope' => 'publish_stream, offline_access'));
 
 		$top = new Top('', 'homePage');
 		echo $top->getOutput();

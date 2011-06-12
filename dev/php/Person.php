@@ -18,7 +18,7 @@ class Person {
 	private $twitterScreenName;
 	private $twitterProtected;
 
-	public function construct($input) {
+	public function __construct($input) {
 		$this->id = array_key_exists('id', $input) ? $input['id'] : null;
 		$this->name = array_key_exists('name', $input) ? $input['name'] : null;
 		$this->email = array_key_exists('email', $input) ? $input['email'] : null;

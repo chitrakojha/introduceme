@@ -51,12 +51,11 @@ class PageSettings {
 		'<script src="/js/settings.js"></script>';
 		$bottom = new Bottom($script);
 		echo $bottom->getOutput();
-
 	}
 
 	private function showConnectedProfiles() {
 		$output = '<div class="clearfix networks">';
-		$facebookLoginUrl = SessionManager::getInstance()->getFacebook()->getLoginUrl(array('redirect_uri' => APP_URL.'/'.Content::l().'/login/facebookcallback/'.Content::l().'/settings/', 'req_perms' => 'publish_stream'));
+		$facebookLoginUrl = SessionManager::getInstance()->getFacebook()->getLoginUrl(array('redirect_uri' => APP_URL.'/'.Content::l().'/login/facebookcallback/'.Content::l().'/settings/', 'scope' => 'publish_stream'));
 		$linkedInLoginUrl = APP_URL.'/'.Content::l().'/login/linkedin/'.Content::l().'/settings/';
 		$twitterLoginUrl = APP_URL.'/'.Content::l().'/login/twitter/'.Content::l().'/settings/';
 
