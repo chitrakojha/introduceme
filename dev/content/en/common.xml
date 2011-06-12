@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+
+	<title>Introduce Me</title>
+	<tagline>Connect your friends</tagline>
+	<or>or</or>
+	<logout>Log out</logout>
+
+	<home>
+		<desc>Select two of your friends to introduce to each other. We’ll send them a notification, and then they can view each other’s social media profiles and begin a private conversation.</desc>
+		<home>Home</home>
+		<history>Your introduction history</history>
+		<you>you</you>
+		<you_capital>You</you_capital>
+		<story>INTRODUCER_NAME introduced INTRODUCEE1_NAME and INTRODUCEE2_NAME</story>
+	</home>
+
+	<introduce>
+		<login>Login:</login>
+		<login_first>← You need to login here first</login_first>
+		<introduce>Introduce:</introduce>
+		<with>With:</with>
+		<enter_name>Start typing your friend’s name</enter_name>
+		<why>Why?</why>
+		<message>Send them a message</message>
+		<submit>Send!</submit>
+		<help>How it works</help>
+		<no_connection>First connect Facebook or LinkedIn</no_connection>
+		<loading>Loading friends...</loading>
+		<one_more_thing>
+			<title>Just one more thing...</title>
+			<body>We need you to grant us permission to notify INTRODUCEE_NAME about this introduction on SOCIAL_NETWORK_NAME.</body>
+			<cta>OK</cta>
+		</one_more_thing>
+		<email>INTRODUCER_NAME would like to introduce you to INTRODUCEE_NAME</email>
+		<notification>INTRODUCER_NAME would like to introduce you to INTRODUCEE_NAME.</notification>
+		<linkedin>
+			<title>Introduction from INTRODUCER_NAME</title>
+			<message>INTRODUCER_NAME would like to introduce you to INTRODUCEE_NAME.
+
+Visit Introduce Me to view the introduction:
+LINK</message>
+		</linkedin>
+		<tweet>I’d like to introduce you to INTRODUCEE_NAME</tweet>
+	</introduce>
+
+	<view>
+		<login>
+			<title>Hi, you need to login to view this introduction</title>
+			<title_targeted>Hi INTRODUCEE_NAME, your friend INTRODUCER_NAME would like to introduce you to OTHER_NAME.</title_targeted>
+			<login>Please login with SOCIAL_NETWORK_NAME to verify your identity and view this introduction.</login>
+			<help>What is this?</help>
+			<faqs>
+				<what>
+					<title>What is Introduce Me?</title>
+					<body>Introduce Me is a web app for introducing people to each other. You can connect it to your profiles on Facebook, LinkedIn and Twitter, and then introduce your friends from any of those networks.</body>
+				</what>
+				<why>
+					<title>Why do I have to log in with SOCIAL_NETWORK_NAME?</title>
+					<body>Your SOCIAL_NETWORK_NAME friend INTRODUCER_NAME sent you an introduction. We need to make sure that you are TARGET_NAME before we can show you the private messages between INTRODUCER_NAME, INTRODUCEE_NAME and you.</body>
+				</why>
+				<spam>
+					<title>How do I know this isn’t spam?</title>
+					<body>You can ask your friend INTRODUCER_NAME if they introduced you to INTRODUCEE_NAME.</body>
+				</spam>
+			</faqs>
+		</login>
+		<title_introducer>You introduced INTRODUCEE1 and INTRODUCEE2</title_introducer>
+		<title_introducee>INTRODUCER introduced you to INTRODUCEE</title_introducee>
+		<message>Send a message to PERSON1 and PERSON2</message>
+		<submit>Send!</submit>
+		<confirmation>
+			<error>Sorry, we were unable to send a message to INTRODUCEE1 and INTRODUCEE2 to tell them about your introduction. You could send them this page URL manually. This error has been reported and we’ll do our best to fix it.</error>
+			<half>We have sent MESSAGE to INTRODUCEE but we were unable to contact INTRODUCEE_ERROR. You could send them this page URL manually. This error has been reported and we’ll do our best to fix it.</half>
+			<same>We have sent MESSAGES to INTRODUCEE1 and INTRODUCEE2 to tell them about your introduction.</same>
+			<separate>We have sent MESSAGE1 to INTRODUCEE1 and MESSAGE2 to INTRODUCEE2 to tell them about your introduction.</separate>
+			<e>
+				<singular>an email</singular>
+				<plural>emails</plural>
+			</e>
+			<f>
+				<singular>a Facebook message</singular>
+				<plural>Facebook messages</plural>
+			</f>
+			<l>
+				<singular>a LinkedIn message</singular>
+				<plural>LinkedIn messages</plural>
+			</l>
+			<t>
+				<singular>a tweet</singular>
+				<plural>tweets</plural>
+			</t>
+		</confirmation>
+		<email_request>
+			<q>We don’t have your email address. Enter it here so we can notify you if PERSON1 or PERSON2 write a reply.</q>
+			<placeholder>Enter your email address</placeholder>
+			<submit>Save</submit>
+		</email_request>
+		<displaying_messages>Displaying messages between you, PERSON1 and PERSON2.</displaying_messages>
+		<wrote>PERSON wrote:</wrote>
+		<you>You</you><!-- i.e. "You" wrote -->
+		<you_lowercase>you</you_lowercase>
+		<message_notification>PERSON wrote a message about your introduction.</message_notification>
+		<view_facebook>View this Facebook profile</view_facebook>
+		<view_twitter>View this Twitter profile</view_twitter>
+	</view>
+
+	<settings>
+		<title>Settings</title>
+		<profiles>Linked networks</profiles>
+		<connect>Connect SOCIAL_NETWORK_NAME</connect>
+		<disconnect>Disconnect SOCIAL_NETWORK_NAME</disconnect>
+		<email>Email address</email>
+		<submit>Save email</submit>
+		<success>Success</success>
+		<saved>Your email has been saved.</saved>
+	</settings>
+
+	<about>
+		<about>About</about>
+		<desc><![CDATA[
+<h1>About Introduce Me</h1>
+<h2>What is Introduce Me?</h2>
+<p>Introduce Me is a web app for introducing people to each other. You can introduce people for any reason you like. Connect people for friendship, connect people who’d make good business partners, or even play cupid and connect people who are a good match for a relationship.</p>
+
+<h2>Which social networks does Introduce Me work with?</h2>
+<p>You can use Introduce Me to introduce your friends on Facebook, LinkedIn and Twitter. You can send cross-network introductions. For example you can introduce one of your Facebook friends with one of your LinkedIn friends.</p>
+
+<h2>What happens when I make an introduction?</h2>
+<p>After you select two friends and click ‘Send’, Introduce Me will send a message to each friend. The message might be sent as an email or on Facebook, LinkedIn or Twitter. The message will contain a link to your introduction page, where you and the two people you introduce can have a private discussion.</p>
+
+<h2>How does privacy work?</h2>
+<p>The names and profile pictures of the people you introduce are publicly viewable (for example in a tweet or Wall post). However any messages that you send will only be shown to the people you introduce.</p>
+
+<h2>Is there a mobile version?</h2>
+<p>No, currently there is only one interface for Introduce Me.</p>
+
+<p class="author">Introduce Me was built by <a href="http://twitter.com/kstre">Keegan Street</a>.</p>
+		]]></desc>
+	</about>
+
+	<errors>
+		<auth_error>Authentication error</auth_error>
+		<ajax_error>AJAX error</ajax_error>
+		<input_error>Input error</input_error>
+		<unknown_error>An unknown error occurred.</unknown_error>
+		<no_session>No user is logged in.</no_session>
+		<invalid_access_token>The access token for SOCIAL_NETWORK_NAME was not valid. You will be redirected to a page where you can authorize this application again.</invalid_access_token>
+		<introduction_not_created>The introduction was not sent. Have you selected two people to introduce?</introduction_not_created>
+		<introduce_to_self>You cannot introduce somebody to themself. That’s just weird.</introduce_to_self>
+	</errors>
+
+	<merge_accounts>
+		<notice>Hold on, it looks like that SOCIAL_NETWORK_NAME profile is already used by a different Introduce Me account.</notice>
+		<question_two_profiles>Do both of these profiles belong to you?</question_two_profiles>
+		<question_more_profiles>Do all of these profiles belong to you?</question_more_profiles>
+		<y>Yes</y>
+		<n>No</n>
+		<note>If you click ‘Yes’, we will merge these profiles into one Introduce Me account.</note>
+	</merge_accounts>
+	
+</root>
+
