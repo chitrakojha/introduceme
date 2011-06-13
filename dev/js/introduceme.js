@@ -70,7 +70,7 @@ var introduceme = (function (module) {
 				},
 				error: function(XMLHttpRequest, textStatus, errorThrown) {
 					// Don't show dialog or it shows even on exit page
-					//module.showDialog('Error loading AJAX', 'Please try again later.', null);
+					//module.showDialog('Error loading AJAX', 'Please try again later.');
 				}
 			});
 		};
@@ -84,7 +84,7 @@ var introduceme = (function (module) {
 		});
 
 		filterFriends = function (input, $output) {
-			var i, len;
+			var i, len, matchFound = false;
 			if (!friendsAddedToDom) {
 				buildFriendSelectors();
 			}
@@ -95,14 +95,19 @@ var introduceme = (function (module) {
 				}
 				return;
 			}
-			$output.parent().show();
 			input = input.toUpperCase();
 			for (i = 0, len = friends.length; i < len; i += 1) {
 				if (friends[i].nameUpperCase.indexOf(input) === -1) {
 					$($output[i]).addClass("filtered");
 				} else {
 					$($output[i]).removeClass("filtered");
+					matchFound = true;
 				}
+			}
+			if (matchFound) {
+				$output.parent().show();
+			} else {
+				$output.parent().hide();
 			}
 		};
 
