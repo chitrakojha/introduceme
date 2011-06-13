@@ -19,6 +19,12 @@ class Top {
 				'<link rel="stylesheet" href="/css/style.css" /><!-- Style source: /css/style.scss -->'.
 				$content.
 				'<script src="/js/modernizr.js"></script>'.
+				'<script>'.
+					'var introduceme = (function (module) {'.
+						'module.mobile = Modernizr.mq("only all and (max-width: 480px)");'.
+						'return module;'.
+					'}(introduceme || {}));'.
+				'</script>'.
 				// jQuery is in the head until we get 1.6.2 because of a bug in opera http://bugs.jquery.com/ticket/9239
 				'<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>'.
 				'<script>window.jQuery || document.write("<script src=\'/js/jquery-1.6.min.js\'>\x3C/script>")</script>'.

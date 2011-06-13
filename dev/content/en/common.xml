@@ -6,6 +6,7 @@
 	<tagline>Connect your friends</tagline>
 	<or>or</or>
 	<logout>Log out</logout>
+	<feedback>Feedback</feedback>
 
 	<home>
 		<desc>Select two of your friends to introduce to each other. We’ll send them a notification, and then they can view each other’s social media profiles and begin a private conversation.</desc>
