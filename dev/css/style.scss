@@ -57,7 +57,7 @@ footer {
 
 .confirmation { padding: 10px; @include borderRadius($borderRadius); background: #FBF9EE; border: 1px solid #edcc7a; margin-top: 14px; }
 
-#introducee1, #introducee2, #email, textarea { width: 260px; font-size: 18px; line-height: 18px; background: #FFF; border: 1px solid #CCC; padding: 10px; @include borderRadius($borderRadius); }
+input[type="text"], input[type="email"], textarea { width: 260px; padding: 10px; font-size: 18px; line-height: 18px; background: #FFF; border: 1px solid #CCC; @include borderRadius($borderRadius); }
 
 /***************************************************
  * Home page
@@ -80,11 +80,11 @@ footer {
 				display: none; width: 276px; padding: 2px; margin: 0; position: absolute; top: 63px; left: 0; background: #FFF; border: 1px solid #CCC; @include borderRadius(5px);
 				li {
 					display: block; height: 19px; padding: 2px 5px; list-style: none; @include borderRadius(5px);
+					&.filtered { display: none; }
+					&:hover, &.hover { background: $green; color: #FFF; }
 					.iconFacebook, .iconLinkedIn, .iconTwitter { width: 16px; height: 19px; float: right; margin-left: 4px; background: url(/images/autocomplete-sprite.png) no-repeat transparent 0 2px; }
 					.iconLinkedIn { background-position: -16px 2px; }
 					.iconTwitter { background-position: -32px 2px; }
-					&.filtered { display: none; }
-					&:hover, &.hover { background: $green; color: #FFF; }
 				}
 			}
 		}
@@ -107,6 +107,11 @@ footer {
 /***************************************************
  * View introduction page
  **************************************************/
+#formEmail {
+	#email { font-size: 16px; float: left; margin-right: 10px; }
+	#email.invalid { border: 1px solid #CD0A0A; }
+	#submitEmail { float: left; margin: 5px 0; }
+}
 .viewIntroductionPage {
 	#main { width: $fullWidth; padding: 0 20px; margin: 0 auto; }
 	.login {
@@ -136,9 +141,6 @@ footer {
 	#formEmail {
 		padding: 10px; @include borderRadius($borderRadius); margin: 14px 0 0; background: #ADDf90; border: 1px solid $green;
 		label { display: block; padding: 0 0 4px 0; }
-		#email { font-size: 16px; float: left; margin-right: 10px; }
-		#email.invalid { border: 1px solid #CD0A0A; }
-		#submitEmail { float: left; margin: 5px 0; }
 	}
 
 	.displayingMessages { padding: 0 0 4px; border-bottom: 1px solid #CCC; font-size: 12px; }
@@ -195,11 +197,6 @@ footer {
 	#main { width: $narrowWidth; padding: 0 20px; margin: 0 auto; }
 	.networks { margin-bottom: 16px; }
 	.connect, .disconnect { display: block; float: left; margin: 15px 0 0 10px; }
-	#formEmail {
-		#email { font-size: 16px; float: left; margin-right: 10px; }
-		#email.invalid { border: 1px solid #CD0A0A; }
-		#submitEmail { float: left; margin: 5px 0; }
-	}
 }
 
 .mergeAccountsPage {
