@@ -24,7 +24,7 @@ class Top {
 				'<script>window.jQuery || document.write("<script src=\'/js/jquery-1.6.min.js\'>\x3C/script>")</script>'.
 			'</head>'.
 
-			'<body class="'.Content::l().' '.$page.'">'.
+			'<body class="lang-'.Content::l().' '.$page.'">'.
 			'<div id="fb-root"></div>'.
 			'<div class="header"><header>'.
 				'<a href="/'.Content::l().'/" class="home"><h1 class="ir">Introd.uce.me</h1></a>'.

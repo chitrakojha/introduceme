@@ -68,12 +68,14 @@ class PageIndex {
 		}
 
 		$script = '<script>'.
-			'im.personId = '.(!empty($this->userId) ? '"'.$this->userId.'"' : 'null').';'.
-			'im.facebookId = '.(!empty($this->userDetails['facebook_access_token']) ? '"'.$this->userDetails['facebook_id'].'"' : 'null').';'.
-			'im.linkedInId = '.(!empty($this->userDetails['linkedin_access_token']) ? '"'.$this->userDetails['linkedin_id'].'"' : 'null').';'.
-			'im.twitterId = '.(!empty($this->userDetails['twitter_access_token']) ? '"'.$this->userDetails['twitter_id'].'"' : 'null').';'.
-		'</script>'.
-		'<script src="/js/index.js"></script>';
+			'var introduceme = (function (module) {'.
+				'module.personId = '.(!empty($this->userId) ? '"'.$this->userId.'"' : 'null').';'.
+				'module.facebookId = '.(!empty($this->userDetails['facebook_access_token']) ? '"'.$this->userDetails['facebook_id'].'"' : 'null').';'.
+				'module.linkedInId = '.(!empty($this->userDetails['linkedin_access_token']) ? '"'.$this->userDetails['linkedin_id'].'"' : 'null').';'.
+				'module.twitterId = '.(!empty($this->userDetails['twitter_access_token']) ? '"'.$this->userDetails['twitter_id'].'"' : 'null').';'.
+				'return module;'.
+			'}(introduceme || {}));'.
+		'</script>';
 		$bottom = new Bottom($script);
 		echo $bottom->getOutput();
 

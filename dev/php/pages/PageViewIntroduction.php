@@ -236,24 +236,6 @@ class PageViewIntroduction {
 		$script = '<script>'.
 				'$(document).ready(function() {'.
 					'_gaq.push(["_trackPageview", "/view-introduction/not-logged-in"]);'.
-					'$("#btnFaqs a").click(function(e) {'.
-						'e.preventDefault();'.
-						'_gaq.push(["_trackPageview", "/view-introduction/learn-more"]);'.
-						'$("#btnFaqs").hide();'.
-						'$("#faqs").slideDown();'.
-					'});'.
-					'$("#loginFacebook").click(function() {'.
-						'_gaq.push(["_trackPageview", "/view-introduction/click-login/facebook"]);'.
-						'return true;'.
-					'});'.
-					'$("#loginLinkedIn").click(function() {'.
-						'_gaq.push(["_trackPageview", "/view-introduction/click-login/linkedin"]);'.
-						'return true;'.
-					'});'.
-					'$("#loginTwitter").click(function() {'.
-						'_gaq.push(["_trackPageview", "/view-introduction/click-login/twitter"]);'.
-						'return true;'.
-					'});'.
 				'});'.
 			'</script>';
 		$bottom = new Bottom($script);
@@ -270,10 +252,13 @@ class PageViewIntroduction {
 				'$(document).ready(function() {'.
 					'_gaq.push(["_trackPageview", "/view-introduction/logged-in"]);'.
 				'});'.
-				'im.youWrote = "'.str_replace('PERSON', Content::c()->view->you, Content::c()->view->wrote).'";'.
-				'im.userType = "'.(($this->userId == $this->introduction['introducer_id']) ? 'introducer' : 'introducee').'";'.
+				'var introduceme = (function (module) {'.
+					'module.content = module.content || {};'.
+					'module.content.youWrote = "'.str_replace('PERSON', Content::c()->view->you, Content::c()->view->wrote).'";'.
+					'module.userType = "'.(($this->userId == $this->introduction['introducer_id']) ? 'introducer' : 'introducee').'";'.
+					'return module;'.
+				'}(introduceme || {}));'.
 			'</script>'.
-			'<script src="/js/view-introduction.js?v=2"></script>'.
 			'<script src="http://www.linkedin.com/js/public-profile/widget-os.js"></script>';
 
 		if ($this->userId == $this->introduction['introducer_id']) { // The user is the introducer

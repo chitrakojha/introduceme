@@ -45,10 +45,13 @@ class PageSettings {
 			'';
 
 		$script = '<script>'.
-			'im.success = "'.Content::c()->settings->success.'";'.
-			'im.saved = "'.Content::c()->settings->saved.'";'.
-		'</script>'.
-		'<script src="/js/settings.js"></script>';
+			'var introduceme = (function (module) {'.
+				'module.content = module.content || {};'.
+				'module.content.success = "'.Content::c()->settings->success.'";'.
+				'module.content.saved = "'.Content::c()->settings->saved.'";'.
+				'return module;'.
+			'}(introduceme || {}));'.
+		'</script>';
 		$bottom = new Bottom($script);
 		echo $bottom->getOutput();
 	}

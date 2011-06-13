@@ -20,7 +20,8 @@ class Bottom {
 			'</footer></div>'.
 
 			'<script src="/js/jquery-ui-1.8.9.custom.min.js"></script>'.
-			'<script src="/js/script.js?v=1"></script>'.
+			'<script src="/js/plugins.js"></script>'.
+			'<script src="/js/introduceme.js"></script>'.
 			$script.
 			'<script>'.
 				// Google Analytics

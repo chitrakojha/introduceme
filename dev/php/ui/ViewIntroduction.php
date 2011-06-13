@@ -80,14 +80,16 @@ class ViewIntroduction {
 			if (!empty($screenName)) {
 				if ($protected != '1') {
 					$output .= '<div class="twitterProfileWidget"><script>'.
-						'new TWTR.Widget({'.
-							'version: 2, type: "profile", rpp: 4, interval: 6000, width: 305, height: 300,'.
-							'theme: {'.
-								'shell: { background: "#0099c7", color: "#ffffff" },'.
-								'tweets: { background: "#ffffff", color: "#444444", links: "#607890" }'.
-							'},'.
-							'features: { scrollbar: false, loop: false, live: false, hashtags: true, timestamp: true, avatars: false, behavior: "all" }'.
-						'}).render().setUser("'.$screenName.'").start();'.
+						'(function () {'.
+							'new TWTR.Widget({'.
+								'version: 2, type: "profile", rpp: 4, interval: 6000, width: 305, height: 300,'.
+								'theme: {'.
+									'shell: { background: "#0099c7", color: "#ffffff" },'.
+									'tweets: { background: "#ffffff", color: "#444444", links: "#607890" }'.
+								'},'.
+								'features: { scrollbar: false, loop: false, live: false, hashtags: true, timestamp: true, avatars: false, behavior: "all" }'.
+							'}).render().setUser("'.$screenName.'").start();'.
+						'}());'.
 					'</script></div>';
 				} else {
 					$output .= '<div class="twitterProfile clearfix">'.
