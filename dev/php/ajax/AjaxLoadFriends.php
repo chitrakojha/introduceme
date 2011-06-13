@@ -129,7 +129,7 @@ class AjaxLoadFriends {
 			$id = $friend['id'];
 			$friendIds[] = $this->db->quote($id);
 			$json['friends'][$id]['facebookId'] = $id;
-			$json['friends'][$id]['label'] = $friend['name'];
+			$json['friends'][$id]['name'] = $friend['name'];
 		}
 		$extraInfoQ = $this->db->prepare('SELECT f.id as facebookId, l.id as linkedInId, t.id as twitterId FROM facebook f, person p LEFT JOIN linkedin l ON p.id = l.person_id LEFT JOIN twitter t ON p.id = t.person_id WHERE p.id = f.person_id AND f.id IN ('.implode(',', $friendIds).')');
 		$extraInfoQ->execute();
@@ -188,11 +188,9 @@ class AjaxLoadFriends {
 		$friendIds = array();
 		foreach ($linkedInFriends['linkedin']->person as $friend) {
 			$id = (string)$friend->id;
-			$firstName = (string)$friend->{'first-name'};
-			$lastName = (string)$friend->{'last-name'};
 			$friendIds[] = $this->db->quote($id);
 			$json['friends'][$id]['linkedInId'] = $id;
-			$json['friends'][$id]['label'] = $firstName.' '.$lastName;
+			$json['friends'][$id]['name'] = $friend->{'first-name'}.' '.$friend->{'last-name'};
 		}
 		$extraInfoQ = $this->db->prepare('SELECT f.id as facebookId, l.id as linkedInId, t.id as twitterId FROM linkedin l, person p LEFT JOIN facebook f ON p.id = f.person_id LEFT JOIN twitter t ON p.id = t.person_id WHERE p.id = l.person_id AND l.id IN ('.implode(',', $friendIds).')');
 		$extraInfoQ->execute();
@@ -255,8 +253,7 @@ class AjaxLoadFriends {
 			$twitterProfiles = $twitter->get('users/lookup', array('user_id' => implode(',', $ids)));
 			foreach ($twitterProfiles as $friend) {
 				$id = (string)$friend->id;
-				$name = (string)$friend->name;
-				$json['friends'][$id]['label'] = $name;
+				$json['friends'][$id]['name'] = (string)$friend->name;
 			}
 		}
 
@@ -302,7 +299,7 @@ class AjaxLoadFriends {
 				if (!empty($cache[$i]['twitter_id'])) {
 					$json['friends'][$i]['twitterId'] = $cache[$i]['twitter_id'];
 				}
-				$json['friends'][$i]['label'] = $cache[$i]['name'];
+				$json['friends'][$i]['name'] = $cache[$i]['name'];
 			}
 			$json['result'] = 'true';
 			$json['time'] = Debug::getInstance()->getTimeElapsed();
@@ -335,7 +332,7 @@ class AjaxLoadFriends {
 				((!empty($friend['facebookId'])) ? $this->db->quote($friend['facebookId']): 'NULL').', '.
 				((!empty($friend['linkedInId'])) ? $this->db->quote($friend['linkedInId']): 'NULL').', '.
 				((!empty($friend['twitterId'])) ? $this->db->quote($friend['twitterId']): 'NULL').', '.
-				$this->db->quote($friend['label']).')';
+				$this->db->quote($friend['name']).')';
 			if ($firstRow) { $firstRow = false; }
 		}
 		$insertTempQ = $this->db->prepare($sql);

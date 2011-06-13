@@ -48,14 +48,16 @@ class PageIndex {
 				'<p id="loginFirst">'.Content::c()->introduce->login_first.'</p>'.
 			'</div>'.
 
-			'<form id="formIntroduce" class="clearfix" novalidate="novalidate">'.
-				'<div class="introduceeInput1">'.
+			'<form id="formIntroduce" class="clearfix" novalidate="novalidate" autocomplete="off">'.
+				'<div class="friendSelector introduceeInput1">'.
 					'<label for="introducee1">'.Content::c()->introduce->introduce.'</label>'.
-					'<input type="text" id="introducee1" class="autocomplete" placeholder="'.Content::c()->introduce->enter_name.'" />'.
+					'<input type="text" id="introducee1" placeholder="'.Content::c()->introduce->enter_name.'" />'.
+					'<ul class="filteredFriends"></ul>'.
 				'</div>'.
-				'<div class="introduceeInput2">'.
+				'<div class="friendSelector introduceeInput2">'.
 					'<label for="introducee2">'.Content::c()->introduce->with.'</label>'.
-					'<input type="text" id="introducee2" class="autocomplete" placeholder="'.Content::c()->introduce->enter_name.'" />'.
+					'<input type="text" id="introducee2" placeholder="'.Content::c()->introduce->enter_name.'" />'.
+					'<ul class="filteredFriends"></ul>'.
 				'</div>'.
 				'<label for="message">'.Content::c()->introduce->why.'</label>'.
 				'<textarea id="message" placeholder="'.Content::c()->introduce->message.'"></textarea>'.
@@ -78,7 +80,6 @@ class PageIndex {
 		'</script>';
 		$bottom = new Bottom($script);
 		echo $bottom->getOutput();
-
 	}
 
 	private function previousIntroductions() {

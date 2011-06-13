@@ -19,7 +19,6 @@ class Bottom {
 					'<a href="/'.Content::l().'/logout/" class="logout">'.Content::c()->logout.'</a>' : '').
 			'</footer></div>'.
 
-			'<script src="/js/jquery-ui-1.8.9.custom.min.js"></script>'.
 			'<script src="/js/plugins.js"></script>'.
 			'<script src="/js/introduceme.js"></script>'.
 			$script.
@@ -34,7 +33,6 @@ class Bottom {
 				'});'.
 			'</script>'.
 
-			'<div id="dialog" title=""></div>'.
 			'</body>'.
 			'</html>';
 	}

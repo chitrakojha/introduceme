@@ -14,10 +14,12 @@ var introduceme = (function (module) {
 	});
 
 	setupHomePage = function () {
-		var friends = [], introducee1, introducee2, loadFriends, startAutoComplete;
+		var friends = [], $friends1, $friends2, friendsAddedToDom = false, introducee1, introducee2, loadFriends, filterFriends, buildFriendSelectors, $filteredFriends;
 		if (!$body.hasClass("homePage")) {
 			return false;
 		}
+
+		$filteredFriends = $(".filteredFriends");
 
 		loadFriends = function(network) {
 			log('Loading ' + network + ' friends');
@@ -28,16 +30,7 @@ var introduceme = (function (module) {
 				dataType: "json",
 				cache: false,
 				success: function(data) {
-					var callback, link, net, i, len, friend, existing, j, friendsLen, friendsSort;
-					friendsSort = function(a, b) {
-						if (a.label === b.label) {
-							return 0;
-						} else if (a.label > b.label) {
-							return 1;
-						} else {
-							return -1;
-						}
-					};
+					var callback, link, net, i, len, existing, j, friendsLen;
 					// Response handler
 					if (data.result === "false") {
 						if (data.message) {
@@ -60,21 +53,19 @@ var introduceme = (function (module) {
 						}
 						for (i = 0, len = data.friends.length; i < len; i += 1) {
 							// Add this friend to the array if they are not already there
-							friend = data.friends[i];
 							existing = false;
 							for (j = 0, friendsLen = friends.length; j < friendsLen; j += 1) {
-								if (friends[j][net + "Id"] === friend[net + "Id"]) {
+								if (friends[j][net + "Id"] === data.friends[i][net + "Id"]) {
 									existing = true;
 									break;
 								}
 							}
 							if (!existing) {
-								friends.push(friend);
+								data.friends[i].nameUpperCase = data.friends[i].name.toUpperCase();
+								friends.push(data.friends[i]);
 							}
-							// Sort the array
-							friends.sort(friendsSort);
 						}
-						startAutoComplete();
+						friendsAddedToDom = false;
 					}
 				},
 				error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -84,53 +75,86 @@ var introduceme = (function (module) {
 			});
 		};
 
-		startAutoComplete = function () {
-			$("#introducee1, #introducee2").autocomplete({
-				source: friends,
-				select: function(event, ui) {
-					$(this).val(ui.item.label);
-					if ($(this).attr("id") === "introducee1") {
-						introducee1 = ui.item;
-					} else {
-						introducee2 = ui.item;
-					}
-					return false;
+		$("#introducee1").bind("keyup", function(e) {
+			filterFriends($(this).val(), $friends1);
+		});
+
+		$("#introducee2").bind("keyup", function(e) {
+			filterFriends($(this).val(), $friends2);
+		});
+
+		filterFriends = function (input, $output) {
+			var i, len;
+			if (!friendsAddedToDom) {
+				buildFriendSelectors();
+			}
+			if (input.length < 3) {
+				if ($output) {
+					$output.removeClass("filtered");
+					$output.parent().hide();
 				}
+				return;
+			}
+			$output.parent().show();
+			input = input.toUpperCase();
+			for (i = 0, len = friends.length; i < len; i += 1) {
+				if (friends[i].nameUpperCase.indexOf(input) === -1) {
+					$($output[i]).addClass("filtered");
+				} else {
+					$($output[i]).removeClass("filtered");
+				}
+			}
+		};
+
+		buildFriendSelectors = function () {
+			var friendsSort, html = '', i, len;
+
+			// Sort the array
+			friendsSort = function(a, b) {
+				if (a.name === b.name) {
+					return 0;
+				} else if (a.name > b.name) {
+					return 1;
+				} else {
+					return -1;
+				}
+			};
+			friends.sort(friendsSort);
+
+			if ($friends1) {
+				$friends1.unbind("click");
+				$friends2.unbind("click");
+			}
+
+			for (i = 0, len = friends.length; i < len; i += 1) {
+				html += '<li>' + friends[i].name;
+				if (friends[i].facebookId) {
+					html += '<div class="ir iconFacebook">&nbsp;</div>';
+				}
+				if (friends[i].linkedInId) {
+					html += '<div class="ir iconLinkedIn">&nbsp;</div>';
+				}
+				if (friends[i].twitterId) {
+					html += '<div class="ir iconTwitter">&nbsp;</div>';
+				}
+				html += '</li>';
+			}
+			$filteredFriends.html(html);
+			$friends1 = $($filteredFriends[0]).children();
+			$friends2 = $($filteredFriends[1]).children();
+			$friends1.click(function (e) {
+				e.preventDefault();
+				introducee1 = friends[$(this).index()];
+				$("#introducee1").val(introducee1.name);
+				$friends1.parent().hide();
 			});
-			$("#introducee1").data("autocomplete")._renderItem = function(ul, item) {
-				var output = $("<li></li>"), inner;
-				output.data("item.autocomplete", item);
-				inner = $("<a>" + item.label + "</a> ");
-				if (item.facebookId) {
-					inner.append('<div class="ir iconFacebook">&nbsp;</div>');
-				}
-				if (item.linkedInId) {
-					inner.append('<div class="ir iconLinkedIn">&nbsp;</div>');
-				}
-				if (item.twitterId) {
-					inner.append('<div class="ir iconTwitter">&nbsp;</div>');
-				}
-				output.append(inner);
-				output.appendTo(ul);
-				return output;
-			};
-			$("#introducee2").data("autocomplete")._renderItem = function(ul, item) {
-				var output = $("<li></li>"), inner;
-				output.data("item.autocomplete", item);
-				inner = $("<a>" + item.label + "</a> ");
-				if (item.facebookId) {
-					inner.append('<div class="ir iconFacebook">&nbsp;</div>');
-				}
-				if (item.linkedInId) {
-					inner.append('<div class="ir iconLinkedIn">&nbsp;</div>');
-				}
-				if (item.twitterId) {
-					inner.append('<div class="ir iconTwitter">&nbsp;</div>');
-				}
-				output.append(inner);
-				output.appendTo(ul);
-				return output;
-			};
+			$friends2.click(function (e) {
+				e.preventDefault();
+				introducee2 = friends[$(this).index()];
+				$("#introducee2").val(introducee2.name);
+				$friends2.parent().hide();
+			});
+			friendsAddedToDom = true;
 		};
 
 		$("#formIntroduce").submit(function(e) {
@@ -138,20 +162,20 @@ var introduceme = (function (module) {
 			e.preventDefault();
 			// Validate form
 			if (!introducee1) {
-				$("#introducee1").effect("highlight", {}, 3000);
+				$("#introducee1").css({background: "#FFFFB1"});
 				validationError = true;
 			}
 			if (!introducee2) {
-				$("#introducee2").effect("highlight", {}, 3000);
+				$("#introducee2").css({background: "#FFFFB1"});
 				validationError = true;
 			}
 			if (validationError) {
 				return false;
 			}
 			// Disable the submit button
-			$("#submitIntroduce").attr('disabled', 'disabled');
+			$("#submitIntroduce").attr("disabled", "disabled");
 			// Analytics
-			_gaq.push(['_trackPageview', '/click-send-introduction']);
+			_gaq.push(["_trackPageview", "/click-send-introduction"]);
 			// Send the data
 			inputData = {
 				introducee1Name: $("#introducee1").val(),
@@ -226,27 +250,12 @@ var introduceme = (function (module) {
 
 	// Show a dialog window
 	showDialog = function (title, body, callback) {
-		var dialog = $("#dialog");
-		dialog.dialog("destroy");
-		dialog.attr("title", title);
-		dialog.html(body);
-		dialog.dialog({
-			minWidth: 400,
-			draggable: false,
-			modal: true,
-			buttons: [{
-				text: "OK",
-				click: function() {
-					if (typeof callback === "function") {
-						callback();
-					}
-					$(this).dialog("destroy");
-				}
-			}],
-			close: function() {
-				$(this).dialog("destroy");
+		var result = confirm(title + "\n" + body);
+		if (result === true) {
+			if (typeof callback === "function") {
+				callback();
 			}
-		});
+		}
 	};
 	
 	setupSettingsPage = function () {

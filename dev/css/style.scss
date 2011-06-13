@@ -1,11 +1,10 @@
-@import "reset";
-@import "jqueryui";
+@import "scss-mixins/boilerplate-top.scss";
+@import "scss-mixins/mixins.scss";
 
 $borderRadius: 5px;
 $buttonShadow: 1px 2px 8px #444;
 $profileShadow: 1px 2px 8px #CCC;
 $boxShadow: 1px 2px 8px #CCC;
-
 
 $green: #72bf44;
 $darkGreen: #3c7c16;
@@ -21,17 +20,15 @@ $narrowWidth: 462px;
  * Common elements
  **************************************************/
 
-body { background: url(/images/header.png) repeat-x #fff 0 0; }
+body { background: url(/images/header.png) repeat-x #fff 0 0; font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; font-weight: 300; font-size: 14px; }
 
 h1, h2, h3, h4, h5, h6 { color: $darkPurple; }
 h1 { font-size: 19px; margin-bottom: 4px; }
 h2 { margin-bottom: 10px; }
 
-body { background: url(/images/header.png) repeat-x #fff 0 0; }
-
 #main { min-height: 300px; }
 
-.button { padding: 5px 10px; background-color: $darkBlue; color: #fff; border: none; font-size: 15px; outline: none; text-decoration: none; -moz-border-radius: $borderRadius; border-radius: $borderRadius; box-shadow: $buttonShadow; -webkit-box-shadow: $buttonShadow; -moz-box-shadow: $buttonShadow; cursor: pointer; }
+.button { padding: 5px 10px; background-color: $darkBlue; color: #fff; border: none; font-size: 15px; outline: none; text-decoration: none; @include borderRadius($borderRadius); @include boxShadow($buttonShadow); cursor: pointer; }
 .button:hover { background: $darkBlueHover; }
 
 a.aButton { @extend .button; display: inline-block; }
@@ -58,9 +55,9 @@ footer {
 #loginLinkedIn.loggedIn { background-position: -52px -52px; }
 #loginTwitter.loggedIn { background-position: -52px -104px; }
 
-.confirmation { padding: 10px; border-radius: $borderRadius; -moz-border-radius: $borderRadius; background: #FBF9EE; border: 1px solid #edcc7a; margin-top: 14px; }
+.confirmation { padding: 10px; @include borderRadius($borderRadius); background: #FBF9EE; border: 1px solid #edcc7a; margin-top: 14px; }
 
-.autocomplete, #email { width: 260px; font-size: 18px; line-height: 22px; background-color: #FFF; border: 1px solid #CCC; padding: 10px; border-radius: $borderRadius; -moz-border-radius: $borderRadius; }
+#introducee1, #introducee2, #email { width: 260px; font-size: 18px; line-height: 18px; background-color: #FFF; border: 1px solid #CCC; padding: 10px; @include borderRadius($borderRadius); }
 
 /***************************************************
  * Home page
@@ -77,16 +74,25 @@ footer {
 		label { display: block; padding: 0 0 4px 6px; color: #888; }
 		.introduceeInput1 { float: left; padding: 0 20px 20px 0; }
 		.introduceeInput2 { float: left; padding: 0 0 20px 0; }
-		textarea { @extend .autocomplete; width: 564px; height: 67px; margin-bottom: 20px; }
+		.friendSelector {
+			position: relative;
+			.filteredFriends {
+				display: none; width: 276px; padding: 2px; margin: 0; position: absolute; top: 63px; left: 0; background: #FFF; border: 1px solid #CCC; @include borderRadius(5px);
+				li {
+					display: block; height: 19px; padding: 2px 5px; list-style: none; @include borderRadius(5px);
+					.iconFacebook, .iconLinkedIn, .iconTwitter { width: 16px; height: 19px; float: right; margin-left: 4px; background: url(/images/autocomplete-sprite.png) no-repeat transparent 0 2px; }
+					.iconLinkedIn { background-position: -16px 2px; }
+					.iconTwitter { background-position: -32px 2px; }
+					&.filtered { display: none; }
+					&:hover, &.hover { background: $green; color: #FFF; }
+				}
+			}
+		}
+		textarea { @extend #introducee1; width: 564px; height: 67px; margin-bottom: 20px; line-height: 22px; }
 		.submit { @extend .button; float: right; }
 		.help { font-size: 12px; float: right; margin: 8px 15px 0 0; }
 	}
-	.ui-widget-content { background: #FFF; }
-	.ui-autocomplete .ui-state-hover, .ui-autocomplete .ui-state-focus { background: $green; color: #FFF; border: 0 none; margin: 0; }
-	.ui-autocomplete .ui-menu-item a.ui-state-hover, .ui-autocomplete .ui-menu-item a.ui-state-active { margin: 0; font-weight: 300; }
-	.iconFacebook, .iconLinkedIn, .iconTwitter { width: 16px; height: 23px; float: right; margin-left: 4px; background: url(/images/autocomplete-sprite.png) no-repeat transparent 0 2px; }
-	.iconLinkedIn { background-position: -16px 2px; }
-	.iconTwitter { background-position: -32px 2px; }
+
 	#previousIntroductions {
 		padding: 10px 0; text-align: center;
 		p { font-size: 13px; margin: 0; }
@@ -213,4 +219,5 @@ footer {
 	.author { margin: 30px 0 16px 0; }
 }
 
-@import "bottom";
+@import "scss-mixins/boilerplate-bottom.scss";
+
