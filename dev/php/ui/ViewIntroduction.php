@@ -5,7 +5,7 @@ class ViewIntroduction {
 	public function  __construct() { }
 
 	public function top() {
-		$top = new Top('<script src="http://widgets.twimg.com/j/2/widget.js"></script>', 'viewIntroductionPage');
+		$top = new Top('', 'viewIntroductionPage');
 		return $top->getOutput();
 	}
 	
@@ -55,10 +55,33 @@ class ViewIntroduction {
 		return $output;
 	}
 
+	public function socialProfileText($person) {
+		$output = '';
+		if ($person->getFacebookId() != '') {
+			$output .= '<li><a target="_blank" href="http://www.facebook.com/profile.php?id='.$person->getFacebookId().'">'.
+				str_replace('PERSON', $person->getName(), Content::c()->view->view_persons_facebook).'</a></li>';
+		}
+		if ($person->getLinkedInId() != '') {
+			$db = Database::getInstance();
+			$profileQ = $db->prepare('SELECT profile_url FROM temp_linkedin WHERE linkedin_id = :linkedin_id');
+			$profileQ->execute(array(':linkedin_id' => $person->getLinkedInId()));
+			$profile = $profileQ->fetch(PDO::FETCH_ASSOC);
+			if (!empty($profile['profile_url'])) {
+				$output .= '<li><a target="_blank" href="'.$profile['profile_url'].'">'.
+					str_replace('PERSON', $person->getName(), Content::c()->view->view_persons_linkedin).'</a></li>';
+			}
+		}
+		if ($person->getTwitterId() != '') {
+			$output .= '<li><a target="_blank" href="http://www.twitter.com/'.$person->getTwitterScreenName().'">'.
+				str_replace('PERSON', $person->getName(), Content::c()->view->view_persons_twitter).'</a></li>';
+		}
+		return $output;
+	}
+
 	public function socialProfile($person) {
 		$output = '';
 		if ($person->getFacebookId() != '') {
-			$output .= '<div class="facebookProfile clearfix"><div class="facebookLogo"><a target="_blank" href="http://www.facebook.com/profile.php?id='.$person->getFacebookId().'"><img src="/images/facebook-profile-logo.png" alt="Facebook" /></a></div>'.
+			$output .= '<div class="facebookProfile clearfix"><div class="facebookLogo"><a target="_blank" href="http://www.facebook.com/profile.php?id='.$person->getFacebookId().'" class="ir">&nbsp;</a></div>'.
 				'<a target="_blank" href="http://www.facebook.com/profile.php?id='.$person->getFacebookId().'"><img src="https://graph.facebook.com/'.$person->getFacebookId().'/picture?type=normal" class="profilePic" /></a>'.
 				'<h2><a target="_blank" href="http://www.facebook.com/profile.php?id='.$person->getFacebookId().'">'.$person->getName().'</a></h2>'.
 				'<p><a target="_blank" href="http://www.facebook.com/profile.php?id='.$person->getFacebookId().'">'.Content::c()->view->view_facebook.'</a></p>'.
@@ -80,20 +103,24 @@ class ViewIntroduction {
 			if (!empty($screenName)) {
 				if ($protected != '1') {
 					$output .= '<div class="twitterProfileWidget"><script>'.
-						'(function () {'.
-							'new TWTR.Widget({'.
-								'version: 2, type: "profile", rpp: 4, interval: 6000, width: 305, height: 300,'.
-								'theme: {'.
-									'shell: { background: "#0099c7", color: "#ffffff" },'.
-									'tweets: { background: "#ffffff", color: "#444444", links: "#607890" }'.
-								'},'.
-								'features: { scrollbar: false, loop: false, live: false, hashtags: true, timestamp: true, avatars: false, behavior: "all" }'.
-							'}).render().setUser("'.$screenName.'").start();'.
-						'}());'.
+						'Modernizr.load({'.
+							'test: introduceme.mobile,'.
+							'nope: "http://widgets.twimg.com/j/2/widget.js",'.
+							'complete: function () {'.
+								'new TWTR.Widget({'.
+									'version: 2, type: "profile", rpp: 4, interval: 6000, width: 305, height: 300,'.
+									'theme: {'.
+										'shell: { background: "#0099c7", color: "#ffffff" },'.
+										'tweets: { background: "#ffffff", color: "#444444", links: "#607890" }'.
+									'},'.
+									'features: { scrollbar: false, loop: false, live: false, hashtags: true, timestamp: true, avatars: false, behavior: "all" }'.
+								'}).render().setUser("'.$screenName.'").start();'.
+							'}'.
+						'});'.
 					'</script></div>';
 				} else {
 					$output .= '<div class="twitterProfile clearfix">'.
-						'<div class="twitterLogo"><a target="_blank" href="http://www.twitter.com/'.$person->getTwitterScreenName().'"><img src="/images/twitter-profile-logo.png" alt="Twitter" /></a></div>'.
+						'<div class="twitterLogo"><a target="_blank" href="http://www.twitter.com/'.$person->getTwitterScreenName().'" class="ir">&nbsp;</a></div>'.
 						(($person->getTwitterPicture() != null) ? '<a target="_blank" href="http://www.twitter.com/'.$person->getTwitterScreenName().'"><img src="'.$person->getTwitterPicture().'" class="profilePic" /></a>' : '').
 						'<h2><a target="_blank" href="http://www.twitter.com/'.$person->getTwitterScreenName().'">'.$person->getName().' <span class="screenName">@'.$person->getTwitterScreenName().'</span></a></h2>'.
 						'<p><a target="_blank" href="http://www.twitter.com/'.$person->getTwitterScreenName().'">'.Content::c()->view->view_twitter.'</a></p>'.

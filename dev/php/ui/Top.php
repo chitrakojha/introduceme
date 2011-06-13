@@ -16,6 +16,7 @@ class Top {
 				'<meta name="description" content="'.Content::c()->tagline.'" />'.
 				'<meta name="author" content="Keegan Street" />'.
 				'<meta property="og:image" content="'.APP_URL.'/images/facebook-share-image.png" />'.
+				'<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />'.
 				'<link rel="stylesheet" href="/css/style.css" /><!-- Style source: /css/style.scss -->'.
 				$content.
 				'<script src="/js/modernizr.js"></script>'.

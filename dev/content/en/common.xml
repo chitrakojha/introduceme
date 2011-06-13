@@ -105,6 +105,10 @@ LINK</message>
 		<message_notification>PERSON wrote a message about your introduction.</message_notification>
 		<view_facebook>View this Facebook profile</view_facebook>
 		<view_twitter>View this Twitter profile</view_twitter>
+		<view_linkedin>View this LinkedIn profile</view_linkedin>
+		<view_persons_facebook>View PERSON's Facebook profile</view_persons_facebook>
+		<view_persons_twitter>View PERSON's Twitter profile</view_persons_twitter>
+		<view_persons_linkedin>View PERSON's LinkedIn profile</view_persons_linkedin>
 	</view>
 
 	<settings>
@@ -135,7 +139,7 @@ LINK</message>
 <p>The names and profile pictures of the people you introduce are publicly viewable (for example in a tweet or Wall post). However any messages that you send will only be shown to the people you introduce.</p>
 
 <h2>Is there a mobile version?</h2>
-<p>No, currently there is only one interface for Introduce Me.</p>
+<p>Yes. Just visit <a href="http://introd.uce.me">introd.uce.me</a> on your phone. The website will detect that you're on a phone and automatically display an interface that is customised for a phone. The mobile interface is light-weight and fast-loading. For a short easy URL, you can also use <a href="http://uce.me">uce.me</a></p>
 
 <p class="author">Introduce Me was built by <a href="http://twitter.com/kstre">Keegan Street</a>.</p>
 		]]></desc>

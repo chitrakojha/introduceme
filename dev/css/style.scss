@@ -37,7 +37,7 @@ a.button {
 header {
 	padding: 0 20px; width: $fullWidth; height: 95px; margin: 0 auto; position: relative;
 	h1 { height: 90px; width: 234px; right: 20px; top: 0; position: absolute; background: url(/images/logo.png) no-repeat; }
-	a.home { text-decoration: none; }
+	a { text-decoration: none; }
 	h2 { position: absolute; top: 0; left: 0; }
 }
 
@@ -59,6 +59,22 @@ footer {
 
 input[type="text"], input[type="email"], textarea { width: 260px; padding: 10px; font-size: 18px; line-height: 18px; background: #FFF; border: 1px solid #CCC; @include borderRadius($borderRadius); }
 
+@media only screen and (max-width: 480px) {
+	#main { min-height: none; }
+	header {
+		width: auto;
+		h1 { position: static; margin: 0 auto; }
+	}
+	footer {
+		width: auto; padding: 20px 10px 20px;
+		a { margin: 0 5px; }
+	}
+	input[type="text"], input[type="email"], textarea { width: auto; padding: 6px; }
+}
+@media only screen and (max-width: 480px) and (min-width: 320px) {
+	input[type="text"], input[type="email"], textarea { width: 320px - 34; }
+}
+
 /***************************************************
  * Home page
  **************************************************/
@@ -77,7 +93,7 @@ input[type="text"], input[type="email"], textarea { width: 260px; padding: 10px;
 		.friendSelector {
 			position: relative;
 			.filteredFriends {
-				display: none; width: 276px; padding: 2px; margin: 0; position: absolute; top: 63px; left: 0; background: #FFF; border: 1px solid #CCC; @include borderRadius(5px);
+				display: none; width: 276px; padding: 2px; margin: 0; position: absolute; top: 63px; left: 0; background: #FFF; border: 1px solid #CCC; @include borderRadius(5px); z-index: 100;
 				li {
 					display: block; height: 19px; padding: 2px 5px; list-style: none; @include borderRadius(5px);
 					&.filtered { display: none; }
@@ -102,6 +118,22 @@ input[type="text"], input[type="email"], textarea { width: 260px; padding: 10px;
 		width: 400px; margin: 0 auto; padding: 20px 0;
 		p { text-align: center; }
 	}
+}
+@media only screen and (max-width: 480px) {
+	.homePage {
+		#main { width: auto; padding: 0 10px; }
+		#formIntroduce {
+			.introduceeInput1, .introduceeInput2 { float: none; padding: 0 0 10px 0; }
+			.friendSelector .filteredFriends { width: auto; }
+			textarea { width: auto; }
+		}
+		#previousIntroductions { padding: 10px 0 0; }
+		#info { width: auto; display: none; }
+	}
+}
+@media only screen and (max-width: 480px) and (min-width: 320px) {
+	.homePage #formIntroduce textarea { width: 320px - 34; }
+	.homePage #formIntroduce .friendSelector .filteredFriends { width: 320px - 26; }
 }
 
 /***************************************************
@@ -143,6 +175,8 @@ input[type="text"], input[type="email"], textarea { width: 260px; padding: 10px;
 		label { display: block; padding: 0 0 4px 0; }
 	}
 
+	.profileTextLinks { display: none; }
+
 	.displayingMessages { padding: 0 0 4px; border-bottom: 1px solid #CCC; font-size: 12px; }
 	#messages {
 		.message {
@@ -159,7 +193,7 @@ input[type="text"], input[type="email"], textarea { width: 260px; padding: 10px;
 	.facebookProfile {
 		width: 295px; padding: 5px; margin: 0 0 20px 0; @include boxShadow(1px, 2px, 8px, #CCC);
 		.facebookLogo { padding: 0 0 2px 4px; border-bottom: 1px solid #CCC; margin: 0 0 10px 0; }
-		.facebookLogo img { height: 15px; width: 53px; }
+		.facebookLogo a { height: 15px; width: 53px; background: transparent url(/images/facebook-profile-logo.png) no-repeat 0 0; }
 		.profilePic { float: left; margin-right: 10px; }
 		h2, p { color: #3B5998; font-family: "lucida grande", tahoma, verdana, arial, sans-serif; }
 		h2 { margin-bottom: 4px; font-size: 19px; }
@@ -173,7 +207,7 @@ input[type="text"], input[type="email"], textarea { width: 260px; padding: 10px;
 	.twitterProfile {
 		width: 295px; padding: 5px; margin: 0 0 20px 0; @include boxShadow(1px, 2px, 8px, #CCC);
 		.twitterLogo { padding: 0 0 2px 4px; border-bottom: 1px solid #CCC; margin: 0 0 10px 0; }
-		.twitterLogo img { height: 15px; width: 62px; }
+		.twitterLogo a { height: 15px; width: 62px; background: transparent url(/images/twitter-profile-logo.png) no-repeat 0 0; }
 		.profilePic { float: left; margin-right: 10px; }
 		h2, p { color: #2276BB; font-family: "lucida grande", lucida, tahoma, helvetica, arial, sans-serif; }
 		h2 { margin-bottom: 4px; font-size: 19px; }
@@ -182,9 +216,39 @@ input[type="text"], input[type="email"], textarea { width: 260px; padding: 10px;
 		.screenName { display: block; font-size: 15px; }
 	}
 }
+@media only screen and (max-width: 480px) {
+	.viewIntroductionPage {
+		#main { width: auto; padding: 0 10px; }
+		.profileTextLinks {
+			display: block; padding: 14px 0 6px;
+			ul { padding: 0; margin: 0; }
+			li { list-style: none; padding: 0; margin: 0; }
+		}
+		.login { width: auto; margin: 10px auto 0; padding: 10px; }
+		.col1 { width: auto; float: none; padding: 0; }
+		.col2 { display: none; }
+		#formMessage {
+			width: auto;
+			textarea { width: auto; }
+		}
+		#formEmail #email { width: auto; }
+		#messages {
+			.message {
+				padding: 10px 0 10px;
+				h2 { margin: 0; }
+			}
+		}
+		.facebookProfile .facebookLogo a { background-image: none; }
+		.twitterProfile .twitterLogo a { background-image: none; }
+	}
+}
+@media only screen and (max-width: 480px) and (min-width: 320px) {
+	.viewIntroductionPage #formMessage textarea { width: 320px - 34; }
+	.viewIntroductionPage #formEmail #email { width: 320px - 34 - 22; }
+}
 
 /***************************************************
- * Other minor pages
+ * Other minor page
  **************************************************/
 
 .sendIntroductionPage {
@@ -213,6 +277,16 @@ input[type="text"], input[type="email"], textarea { width: 260px; padding: 10px;
 	h2 { margin: 0 0 4px 0; }
 	p { margin: 0 0 16px 0; }
 	.author { margin: 30px 0 16px 0; }
+}
+@media only screen and (max-width: 480px) {
+	.sendIntroductionPage, .settingsPage, .mergeAccountsPage, .aboutPage {
+		#main { width: auto; padding: 0 10px; }
+	}
+	.sendIntroductionPage .sendIntroduction { width: auto; margin: 10px auto 0; padding: 10px; }
+	#formEmail {
+		#email { margin: 0; float: none; }
+		#submitEmail { margin: 10px 0 0; float: right; }
+	}
 }
 
 @import "scss-mixins/boilerplate-bottom.scss";

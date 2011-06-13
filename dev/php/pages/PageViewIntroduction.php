@@ -249,17 +249,20 @@ class PageViewIntroduction {
 		$ui = new ViewIntroduction();
 		$output .= $ui->top();
 		$script = '<script>'.
-				'$(document).ready(function() {'.
-					'_gaq.push(["_trackPageview", "/view-introduction/logged-in"]);'.
-				'});'.
-				'var introduceme = (function (module) {'.
-					'module.content = module.content || {};'.
-					'module.content.youWrote = "'.str_replace('PERSON', Content::c()->view->you, Content::c()->view->wrote).'";'.
-					'module.userType = "'.(($this->userId == $this->introduction['introducer_id']) ? 'introducer' : 'introducee').'";'.
-					'return module;'.
-				'}(introduceme || {}));'.
-			'</script>'.
-			'<script src="http://www.linkedin.com/js/public-profile/widget-os.js"></script>';
+			'$(document).ready(function() {'.
+				'_gaq.push(["_trackPageview", "/view-introduction/logged-in"]);'.
+			'});'.
+			'var introduceme = (function (module) {'.
+				'module.content = module.content || {};'.
+				'module.content.youWrote = "'.str_replace('PERSON', Content::c()->view->you, Content::c()->view->wrote).'";'.
+				'module.userType = "'.(($this->userId == $this->introduction['introducer_id']) ? 'introducer' : 'introducee').'";'.
+				'return module;'.
+			'}(introduceme || {}));'.
+			'Modernizr.load({'.
+				'test: introduceme.mobile,'.
+				'nope: "http://www.linkedin.com/js/public-profile/widget-os.js"'.
+			'});'.
+		'</script>';
 
 		if ($this->userId == $this->introduction['introducer_id']) { // The user is the introducer
 			$introducee1 = new Person(array());
@@ -281,6 +284,11 @@ class PageViewIntroduction {
 			if (empty($this->userDetails['email'])) {
 				$output .= $ui->emailForm($introducee1, $introducee2);
 			}
+
+			$output .= '<div class="profileTextLinks"><ul>'.
+					$ui->socialProfileText($introducee1). // Show introducee 1 profile
+					$ui->socialProfileText($introducee2). // Show introducee 2 profile
+				'</ul></div>';
 
 			// Show a message input form
 			$output .= $ui->messageBox($introducee1, $introducee2, $this->id);
@@ -348,18 +356,22 @@ class PageViewIntroduction {
 			$output .= $ui->emailForm($introducer, $introducee);
 		}
 
+		$output .= '<div class="profileTextLinks"><ul>'.
+				$ui->socialProfileText($introducee). // Show introducee profile
+			'</ul></div>';
+
 		// Show a message input form
 		$output .= $ui->messageBox($introducer, $introducee, $this->id);
 
 		// Show messages
-		$output .= '<div id="messages">';
 		$messagesQ = $this->db->prepare('SELECT body, time, writer_id FROM message WHERE introduction_id = :introduction_id ORDER BY time DESC');
 		$messagesQ->execute(array(':introduction_id' => $this->id));
 		$messages = $messagesQ->fetchAll(PDO::FETCH_ASSOC);
 		$len = count($messages);
 		if ($len > 0) {
 			$output .= '<div class="displayingMessages">'.str_replace('PERSON1', $introducer->getName(),
-				str_replace('PERSON2', $introducee->getName(), Content::c()->view->displaying_messages)).'</div>';
+				str_replace('PERSON2', $introducee->getName(), Content::c()->view->displaying_messages)).'</div>'.
+				'<div id="messages">';
 			for ($i=0; $i<$len; $i++) {
 				$writer = '';
 				if ($messages[$i]['writer_id'] == $this->userId) {
