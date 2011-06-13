@@ -314,9 +314,9 @@ class PageViewIntroduction {
 					}
 					$output .= $ui->message($writer, strtotime($messages[$i]['time']), $messages[$i]['body']);
 				}
+				$output .= '</div>'; // #messages DIV
 			}
-			$output .= '</div>'. // #messages DIV
-				'</div><div class="col2">'.
+			$output .= '</div><div class="col2">'.
 				$ui->socialProfile($introducee1). // Show introducee 1 profile
 				$ui->socialProfile($introducee2). // Show introducee 2 profile
 				'</div>'; // .col2
@@ -383,9 +383,9 @@ class PageViewIntroduction {
 				}
 				$output .= $ui->message($writer, strtotime($messages[$i]['time']), $messages[$i]['body']);
 			}
+			$output .= '</div>'; // #messages DIV
 		}
-		$output .= '</div>'. // #messages DIV
-			'</div><div class="col2">'.
+		$output .= '</div><div class="col2">'.
 			$ui->socialProfile($introducee). // Show introducee profile
 			'</div>'; // .col2
 		$bottom = new Bottom($script);

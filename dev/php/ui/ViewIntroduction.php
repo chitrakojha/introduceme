@@ -103,10 +103,8 @@ class ViewIntroduction {
 			if (!empty($screenName)) {
 				if ($protected != '1') {
 					$output .= '<div class="twitterProfileWidget"><script>'.
-						'Modernizr.load({'.
-							'test: introduceme.mobile,'.
-							'nope: "http://widgets.twimg.com/j/2/widget.js",'.
-							'complete: function () {'.
+						'if (!introduceme.mobile) {'.
+							'$("body").bind("twitterWidgetLoaded", function (e) {'.
 								'new TWTR.Widget({'.
 									'version: 2, type: "profile", rpp: 4, interval: 6000, width: 305, height: 300,'.
 									'theme: {'.
@@ -115,8 +113,9 @@ class ViewIntroduction {
 									'},'.
 									'features: { scrollbar: false, loop: false, live: false, hashtags: true, timestamp: true, avatars: false, behavior: "all" }'.
 								'}).render().setUser("'.$screenName.'").start();'.
-							'}'.
-						'});'.
+							'});'.
+							'$(".twitterProfileWidget").append("<script src=\'/js/twitter-widget.js\'>\x3C/script>");'.
+						'}'.
 					'</script></div>';
 				} else {
 					$output .= '<div class="twitterProfile clearfix">'.
