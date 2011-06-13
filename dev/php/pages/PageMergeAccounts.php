@@ -59,10 +59,10 @@ class PageMergeAccounts {
 		}
 
 		echo '<form action="/'.Content::l().'/logout/" method="post" class="no">'.
-				'<button type="submit" class="inputsubmit">'.Content::c()->merge_accounts->n.'</button>'.
+				'<input type="submit" class="button" value="'.Content::c()->merge_accounts->n.'" />'.
 			'</form>'.
 			'<form action="/'.Content::l().'/ajax/merge-accounts/" method="post" class="yes">'.
-				'<button type="submit" class="inputsubmit">'.Content::c()->merge_accounts->y.'</button>'.
+				'<input type="submit" class="button" value="'.Content::c()->merge_accounts->y.'" />'.
 			'</form>'.
 			'<p class="note">'.Content::c()->merge_accounts->note.'</p>';
 

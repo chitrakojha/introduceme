@@ -50,7 +50,7 @@ class ViewIntroduction {
 				'<label for="email">'.str_replace('PERSON1', $person1->getName(),
 					str_replace('PERSON2', $person2->getName(), Content::c()->view->email_request->q)).'</label>'.
 				'<input type="email" name="email" id="email" placeholder="'.Content::c()->view->email_request->placeholder.'" />'.
-				'<input id="submitEmail" class="submit" type="submit" value="'.Content::c()->view->email_request->submit.'" />'.
+				'<input id="submitEmail" class="button" type="submit" value="'.Content::c()->view->email_request->submit.'" />'.
 			'</form>';
 		return $output;
 	}
@@ -109,7 +109,7 @@ class ViewIntroduction {
 			'<input type="hidden" name="id" value="'.$id.'" />'.
 			'<textarea id="message" name="message" placeholder="'.str_replace('PERSON1', $person1->getName(),
 				str_replace('PERSON2', $person2->getName(), Content::c()->view->message)).'"></textarea>'.
-			'<input id="submitMessage" class="submit" type="submit" value="'.Content::c()->view->submit.'" />'.
+			'<input id="submitMessage" class="button" type="submit" value="'.Content::c()->view->submit.'" />'.
 		'</form>';
 		return $output;
 	}

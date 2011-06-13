@@ -61,7 +61,7 @@ class PageIndex {
 				'</div>'.
 				'<label for="message">'.Content::c()->introduce->why.'</label>'.
 				'<textarea id="message" placeholder="'.Content::c()->introduce->message.'"></textarea>'.
-				'<input id="submitIntroduce" class="submit" type="submit" value="'.Content::c()->introduce->submit.'" />'.
+				'<input id="submitIntroduce" class="button" type="submit" value="'.Content::c()->introduce->submit.'" />'.
 				'<a href="/'.Content::l().'/about/" class="help">'.Content::c()->introduce->help.'</a>'.
 			'</form>';
 

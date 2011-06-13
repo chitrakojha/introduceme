@@ -40,7 +40,7 @@ class PageSettings {
 			'<h2>'.Content::c()->settings->email.'</h2>'.
 			'<form id="formEmail" class="clearfix">'.
 				'<input type="email" name="email" id="email" value="'.$this->userDetails['email'].'" placeholder="'.Content::c()->view->email_request->placeholder.'" />'.
-				'<input id="submitEmail" class="submit" type="submit" value="'.Content::c()->settings->submit.'" />'.
+				'<input id="submitEmail" class="button" type="submit" value="'.Content::c()->settings->submit.'" />'.
 			'</form>'.
 			'';
 

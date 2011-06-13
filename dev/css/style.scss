@@ -2,9 +2,6 @@
 @import "scss-mixins/mixins.scss";
 
 $borderRadius: 5px;
-$buttonShadow: 1px 2px 8px #444;
-$profileShadow: 1px 2px 8px #CCC;
-$boxShadow: 1px 2px 8px #CCC;
 
 $green: #72bf44;
 $darkGreen: #3c7c16;
@@ -28,11 +25,14 @@ h2 { margin-bottom: 10px; }
 
 #main { min-height: 300px; }
 
-.button { padding: 5px 10px; background-color: $darkBlue; color: #fff; border: none; font-size: 15px; outline: none; text-decoration: none; @include borderRadius($borderRadius); @include boxShadow($buttonShadow); cursor: pointer; }
-.button:hover { background: $darkBlueHover; }
-
-a.aButton { @extend .button; display: inline-block; }
-a.aButton:hover { background: $darkBlueHover; }
+.button {
+	padding: 5px 10px; background-color: $darkBlue; color: #fff; border: none; font-size: 15px; outline: none; text-decoration: none; @include borderRadius($borderRadius); @include boxShadow(1px, 2px, 8px, #444); cursor: pointer;
+	&:hover { background: $darkBlueHover; }
+}
+a.button {
+	display: inline-block;
+	&:hover { background: $darkBlueHover; }
+}
 
 header {
 	padding: 0 20px; width: $fullWidth; height: 95px; margin: 0 auto; position: relative;
@@ -48,7 +48,7 @@ footer {
 	a:hover { color: #888888; text-decoration: underline; }
 }
 
-#loginFacebook, #loginLinkedIn, #loginTwitter { width: 52px; height: 52px; display: block; float: left; background: url(/images/login-sprite.png) no-repeat #FFF 0 0; }
+#loginFacebook, #loginLinkedIn, #loginTwitter { width: 52px; height: 52px; display: block; float: left; background: #FFF url(/images/login-sprite.png) no-repeat 0 0; }
 #loginLinkedIn { background-position: 0 -52px; }
 #loginTwitter { background-position: 0 -104px; }
 #loginFacebook.loggedIn { background-position: -52px 0; }
@@ -57,7 +57,7 @@ footer {
 
 .confirmation { padding: 10px; @include borderRadius($borderRadius); background: #FBF9EE; border: 1px solid #edcc7a; margin-top: 14px; }
 
-#introducee1, #introducee2, #email { width: 260px; font-size: 18px; line-height: 18px; background-color: #FFF; border: 1px solid #CCC; padding: 10px; @include borderRadius($borderRadius); }
+#introducee1, #introducee2, #email, textarea { width: 260px; font-size: 18px; line-height: 18px; background: #FFF; border: 1px solid #CCC; padding: 10px; @include borderRadius($borderRadius); }
 
 /***************************************************
  * Home page
@@ -88,8 +88,8 @@ footer {
 				}
 			}
 		}
-		textarea { @extend #introducee1; width: 564px; height: 67px; margin-bottom: 20px; line-height: 22px; }
-		.submit { @extend .button; float: right; }
+		textarea { width: 564px; height: 67px; margin-bottom: 20px; line-height: 22px; }
+		#submitIntroduce { float: right; }
 		.help { font-size: 12px; float: right; margin: 8px 15px 0 0; }
 	}
 
@@ -110,7 +110,7 @@ footer {
 .viewIntroductionPage {
 	#main { width: $fullWidth; padding: 0 20px; margin: 0 auto; }
 	.login {
-		width: 462px; margin: 60px auto 0; padding: 20px; -moz-border-radius: $borderRadius; border-radius: $borderRadius; box-shadow: $boxShadow; -webkit-box-shadow: $boxShadow; -moz-box-shadow: $boxShadow;
+		width: 462px; margin: 60px auto 0; padding: 20px; @include borderRadius($borderRadius); @include boxShadow(1px, 2px, 8px, #CCC);
 		.loginIcons { margin: 10px 0 0 -9px; }
 		img { float: right; margin: 0 0 10px 10px; }
 		.faqsContainer {
@@ -125,20 +125,20 @@ footer {
 	}
 	.col1 { width: 462px; float: left; padding-right: 20px; }
 	.col2 { width: 305px; float: right; }
-		
+
 	#formMessage {
 		padding: 14px 0 20px; width: 462px; margin: 0 auto;
-		textarea { @extend .autocomplete; font-size: 16px; line-height: 20px; width: 440px; height: 61px; margin-bottom: 10px; }
-		.submit { @extend .button; float: right; }
+		textarea { font-size: 16px; line-height: 20px; width: 440px; height: 61px; margin-bottom: 10px; }
+		#submitMessage { float: right; }
 		#message.invalid { border: 1px solid #CD0A0A; }
 	}
 
 	#formEmail {
-		padding: 10px; border-radius: $borderRadius; -moz-border-radius: $borderRadius; margin: 14px 0 0; background: #ADDf90; border: 1px solid $green;
+		padding: 10px; @include borderRadius($borderRadius); margin: 14px 0 0; background: #ADDf90; border: 1px solid $green;
 		label { display: block; padding: 0 0 4px 0; }
 		#email { font-size: 16px; float: left; margin-right: 10px; }
 		#email.invalid { border: 1px solid #CD0A0A; }
-		.submit { @extend .button; float: left; margin: 5px 0; }
+		#submitEmail { float: left; margin: 5px 0; }
 	}
 
 	.displayingMessages { padding: 0 0 4px; border-bottom: 1px solid #CCC; font-size: 12px; }
@@ -150,30 +150,30 @@ footer {
 			p { clear: both; }
 		}
 	}
-	
-	.linkedInProfile { width: 295px; padding: 5px; margin: 0 0 20px 0; box-shadow: $profileShadow; -webkit-box-shadow: $profileShadow; -moz-box-shadow: $profileShadow; }
+
+	.linkedInProfile { width: 295px; padding: 5px; margin: 0 0 20px 0; @include boxShadow(1px, 2px, 8px, #CCC); }
 	.linkedInProfile iframe { width: 295px !important; height: auto !important; }
 
 	.facebookProfile {
-		width: 295px; padding: 5px; margin: 0 0 20px 0; box-shadow: $profileShadow; -webkit-box-shadow: $profileShadow; -moz-box-shadow: $profileShadow;
+		width: 295px; padding: 5px; margin: 0 0 20px 0; @include boxShadow(1px, 2px, 8px, #CCC);
 		.facebookLogo { padding: 0 0 2px 4px; border-bottom: 1px solid #CCC; margin: 0 0 10px 0; }
 		.facebookLogo img { height: 15px; width: 53px; }
 		.profilePic { float: left; margin-right: 10px; }
-		h2, p { color: #3B5998; font-family: 'lucida grande', tahoma, verdana, arial, sans-serif; }
+		h2, p { color: #3B5998; font-family: "lucida grande", tahoma, verdana, arial, sans-serif; }
 		h2 { margin-bottom: 4px; font-size: 19px; }
 		a, a:hover { color: #3B5998; text-decoration: none; }
 		p { font-size: 12px; }
 	}
 
 	.twitterProfileWidget {
-		width: 305px; margin: 0 0 20px 0; box-shadow: $profileShadow; -webkit-box-shadow: $profileShadow; -moz-box-shadow: $profileShadow;
+		width: 305px; margin: 0 0 20px 0; @include boxShadow(1px, 2px, 8px, #CCC);
 	}
 	.twitterProfile {
-		width: 295px; padding: 5px; margin: 0 0 20px 0; box-shadow: $profileShadow; -webkit-box-shadow: $profileShadow; -moz-box-shadow: $profileShadow;
+		width: 295px; padding: 5px; margin: 0 0 20px 0; @include boxShadow(1px, 2px, 8px, #CCC);
 		.twitterLogo { padding: 0 0 2px 4px; border-bottom: 1px solid #CCC; margin: 0 0 10px 0; }
 		.twitterLogo img { height: 15px; width: 62px; }
 		.profilePic { float: left; margin-right: 10px; }
-		h2, p { color: #2276BB; font-family: "lucida grande",lucida,tahoma,helvetica,arial,sans-serif; }
+		h2, p { color: #2276BB; font-family: "lucida grande", lucida, tahoma, helvetica, arial, sans-serif; }
 		h2 { margin-bottom: 4px; font-size: 19px; }
 		a, a:hover { color: #2276BB; text-decoration: none; }
 		p { font-size: 12px; }
@@ -188,7 +188,7 @@ footer {
 .sendIntroductionPage {
 	#main { width: $narrowWidth; padding: 0 20px; margin: 0 auto; }
 	.desc { margin-bottom: 10px; }
-	.sendIntroduction { width: 462px; margin: 60px auto 0; padding: 20px; -moz-border-radius: $borderRadius; border-radius: $borderRadius; box-shadow: $boxShadow; -webkit-box-shadow: $boxShadow; -moz-box-shadow: $boxShadow; }
+	.sendIntroduction { width: 462px; margin: 60px auto 0; padding: 20px; @include borderRadius($borderRadius); @include boxShadow(1px, 2px, 8px, #CCC); }
 }
 
 .settingsPage { 
@@ -198,7 +198,7 @@ footer {
 	#formEmail {
 		#email { font-size: 16px; float: left; margin-right: 10px; }
 		#email.invalid { border: 1px solid #CD0A0A; }
-		.submit { @extend .button; float: left; margin: 5px 0; }
+		#submitEmail { float: left; margin: 5px 0; }
 	}
 }
 
@@ -208,7 +208,6 @@ footer {
 	a.profile { display: block; width: 400px; margin: 0 0 10px 0; font-size: 15px; text-decoration: none; }
 	a.profile img { display: inline-block; margin-right: 5px; vertical-align: middle; width: 48px; height: 48px; background-color: #F4F4F4; }
 	.no, .yes { float: left; margin: 10px 20px 20px 0; }
-	.inputsubmit { @extend .button; }
 	.note { clear: both; }
 }
 

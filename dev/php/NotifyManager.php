@@ -136,7 +136,7 @@ class NotifyManager {
 		$output = '<h1>'.Content::c()->introduce->one_more_thing->title.'</h1><p class="desc">'.
 			str_replace('INTRODUCEE_NAME', $this->introducee->getName(),
 			str_replace('SOCIAL_NETWORK_NAME', 'Facebook', Content::c()->introduce->one_more_thing->body)).
-			'</p><p><a class="aButton" href="'.$this->facebookLoginUrl.'">'.Content::c()->introduce->one_more_thing->cta.'</a></p>'.
+			'</p><p><a class="button" href="'.$this->facebookLoginUrl.'">'.Content::c()->introduce->one_more_thing->cta.'</a></p>'.
 			'<script>_gaq.push(["_trackPageview", "/facebook-permissions-request"]);</script>';
 		try {
 			$fql = array(

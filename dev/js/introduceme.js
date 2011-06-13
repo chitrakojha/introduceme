@@ -257,7 +257,7 @@ var introduceme = (function (module) {
 			}
 		}
 	};
-	
+
 	setupSettingsPage = function () {
 		if (!$body.hasClass("settingsPage")) {
 			return false;
