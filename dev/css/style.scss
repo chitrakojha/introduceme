@@ -36,7 +36,7 @@ a.button {
 
 header {
 	padding: 0 20px; width: $fullWidth; height: 95px; margin: 0 auto; position: relative;
-	h1 { height: 90px; width: 234px; right: 20px; top: 0; position: absolute; background: url(/images/logo.png) no-repeat; }
+	h1 { height: 79px; width: 234px; right: 20px; top: 0; position: absolute; background: url(/images/logo.png) no-repeat; }
 	a { text-decoration: none; }
 	h2 { position: absolute; top: 0; left: 0; }
 }
@@ -59,20 +59,17 @@ footer {
 
 input[type="text"], input[type="email"], textarea { width: 260px; padding: 10px; font-size: 18px; line-height: 18px; background: #FFF; border: 1px solid #CCC; @include borderRadius($borderRadius); }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 640px) {
 	#main { min-height: none; }
 	header {
-		width: auto;
+		width: auto; padding: 0;
 		h1 { position: static; margin: 0 auto; }
 	}
 	footer {
 		width: auto; padding: 20px 10px 20px;
 		a { margin: 0 5px; }
 	}
-	input[type="text"], input[type="email"], textarea { width: auto; padding: 6px; }
-}
-@media only screen and (max-width: 480px) and (min-width: 320px) {
-	input[type="text"], input[type="email"], textarea { width: 320px - 34; }
+	input[type="text"], input[type="email"], textarea { @include boxSizing(border-box); width: 100%; padding: 6px; }
 }
 
 /***************************************************
@@ -119,26 +116,26 @@ input[type="text"], input[type="email"], textarea { width: 260px; padding: 10px;
 		p { text-align: center; }
 	}
 }
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 640px) {
 	.homePage {
 		#main { width: auto; padding: 0 10px; }
 		#formIntroduce {
 			.introduceeInput1, .introduceeInput2 { float: none; padding: 0 0 10px 0; }
-			.friendSelector .filteredFriends { width: auto; }
-			textarea { width: auto; }
+			.friendSelector .filteredFriends {
+				@include boxSizing(border-box); width: 100%; top: 55px;
+				li { padding: 4px 5px; }
+			}
+			textarea { width: 100%; }
 		}
 		#previousIntroductions { padding: 10px 0 0; }
 		#info { width: auto; display: none; }
 	}
 }
-@media only screen and (max-width: 480px) and (min-width: 320px) {
-	.homePage #formIntroduce textarea { width: 320px - 34; }
-	.homePage #formIntroduce .friendSelector .filteredFriends { width: 320px - 26; }
-}
 
 /***************************************************
  * View introduction page
  **************************************************/
+
 #formEmail {
 	#email { font-size: 16px; float: left; margin-right: 10px; }
 	#email.invalid { border: 1px solid #CD0A0A; }
@@ -216,22 +213,21 @@ input[type="text"], input[type="email"], textarea { width: 260px; padding: 10px;
 		.screenName { display: block; font-size: 15px; }
 	}
 }
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 640px) {
 	.viewIntroductionPage {
 		#main { width: auto; padding: 0 10px; }
 		.profileTextLinks {
 			display: block; padding: 14px 0 6px;
-			ul { padding: 0; margin: 0; }
-			li { list-style: none; padding: 0; margin: 0; }
+			li { padding: 0; margin: 0; }
 		}
 		.login { width: auto; margin: 10px auto 0; padding: 10px; }
 		.col1 { width: auto; float: none; padding: 0; }
 		.col2 { display: none; }
 		#formMessage {
 			width: auto;
-			textarea { width: auto; }
+			textarea { width: 100%; }
 		}
-		#formEmail #email { width: auto; }
+		#formEmail #email { width: 100%; }
 		#messages {
 			.message {
 				padding: 10px 0 10px;
@@ -242,13 +238,9 @@ input[type="text"], input[type="email"], textarea { width: 260px; padding: 10px;
 		.twitterProfile .twitterLogo a { background-image: none; }
 	}
 }
-@media only screen and (max-width: 480px) and (min-width: 320px) {
-	.viewIntroductionPage #formMessage textarea { width: 320px - 34; }
-	.viewIntroductionPage #formEmail #email { width: 320px - 34 - 22; }
-}
 
 /***************************************************
- * Other minor page
+ * Other minor pages
  **************************************************/
 
 .sendIntroductionPage {
@@ -278,7 +270,7 @@ input[type="text"], input[type="email"], textarea { width: 260px; padding: 10px;
 	p { margin: 0 0 16px 0; }
 	.author { margin: 30px 0 16px 0; }
 }
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 640px) {
 	.sendIntroductionPage, .settingsPage, .mergeAccountsPage, .aboutPage {
 		#main { width: auto; padding: 0 10px; }
 	}

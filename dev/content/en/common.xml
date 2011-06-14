@@ -18,12 +18,13 @@
 	</home>
 
 	<introduce>
-		<login>Login:</login>
-		<login_first>← You need to login here first</login_first>
-		<introduce>Introduce:</introduce>
-		<with>With:</with>
+		<login>1. Login:</login>
+		<login_here_first>← You need to login here first</login_here_first>
+		<login_first>You need to login first</login_first>
+		<introduce>2. Introduce:</introduce>
+		<with>3. With:</with>
 		<enter_name>Start typing your friend’s name</enter_name>
-		<why>Why?</why>
+		<why>4. Why?</why>
 		<message>Send them a message</message>
 		<submit>Send!</submit>
 		<help>How it works</help>
@@ -106,9 +107,9 @@ LINK</message>
 		<view_facebook>View this Facebook profile</view_facebook>
 		<view_twitter>View this Twitter profile</view_twitter>
 		<view_linkedin>View this LinkedIn profile</view_linkedin>
-		<view_persons_facebook>View PERSON's Facebook profile</view_persons_facebook>
-		<view_persons_twitter>View PERSON's Twitter profile</view_persons_twitter>
-		<view_persons_linkedin>View PERSON's LinkedIn profile</view_persons_linkedin>
+		<view_persons_facebook>PERSON on Facebook</view_persons_facebook>
+		<view_persons_twitter>PERSON on Twitter</view_persons_twitter>
+		<view_persons_linkedin>PERSON on LinkedIn</view_persons_linkedin>
 	</view>
 
 	<settings>

@@ -22,7 +22,7 @@ class Top {
 				'<script src="/js/modernizr.js"></script>'.
 				'<script>'.
 					'var introduceme = (function (module) {'.
-						'module.mobile = Modernizr.mq("only all and (max-width: 480px)");'.
+						'module.mobile = Modernizr.mq("only all and (max-width: 640px)");'.
 						'return module;'.
 					'}(introduceme || {}));'.
 				'</script>'.

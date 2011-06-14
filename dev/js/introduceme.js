@@ -232,10 +232,16 @@ var introduceme = (function (module) {
 			}
 		} else {
 			$(":text, textarea").focus(function() {
-				$("#loginFirst").css({"display": "block", "padding-left": "40px"});
-				$('#loginFirst').animate({
-					paddingLeft: "10px"
-				});
+				if (!module.mobile) {
+					$("#loginFirst").css({"display": "block", "padding-left": "40px"});
+					$('#loginFirst').animate({
+						paddingLeft: "10px"
+					});
+				}
+			}).click(function (e) {
+				if (module.mobile) {
+					alert(module.content.loginFirst);
+				}
 			});
 		}
 

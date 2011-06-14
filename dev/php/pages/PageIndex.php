@@ -45,7 +45,7 @@ class PageIndex {
 					(!empty($this->userDetails['linkedin_access_token']) ? ' loggedIn' : '').'">LinkedIn</a>'.
 				'<a href="/'.Content::l().'/login/twitter/" id="loginTwitter" class="ir'.
 					(!empty($this->userDetails['twitter_access_token']) ? ' loggedIn' : '').'">Twitter</a>'.
-				'<p id="loginFirst">'.Content::c()->introduce->login_first.'</p>'.
+				'<p id="loginFirst">'.Content::c()->introduce->login_here_first.'</p>'.
 			'</div>'.
 
 			'<form id="formIntroduce" class="clearfix" novalidate="novalidate" autocomplete="off">'.
@@ -71,6 +71,8 @@ class PageIndex {
 
 		$script = '<script>'.
 			'var introduceme = (function (module) {'.
+				'module.content = module.content || {};'.
+				'module.content.loginFirst = "'.Content::c()->introduce->login_first.'";'.
 				'module.personId = '.(!empty($this->userId) ? '"'.$this->userId.'"' : 'null').';'.
 				'module.facebookId = '.(!empty($this->userDetails['facebook_access_token']) ? '"'.$this->userDetails['facebook_id'].'"' : 'null').';'.
 				'module.linkedInId = '.(!empty($this->userDetails['linkedin_access_token']) ? '"'.$this->userDetails['linkedin_id'].'"' : 'null').';'.
