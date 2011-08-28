@@ -15,6 +15,7 @@
 		<you>you</you>
 		<you_capital>You</you_capital>
 		<story>INTRODUCER_NAME introduced INTRODUCEE1_NAME and INTRODUCEE2_NAME</story>
+		<loading>Loading SOCIAL_NETWORK_NAME friends</loading>
 	</home>
 
 	<introduce>

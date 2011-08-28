@@ -135,6 +135,8 @@ input[type="text"], input[type="email"], textarea { width: 260px; padding: 10px;
 		#info { width: auto; display: none; }
 	}
 }
+#preloaderFriends { padding: 2px; display: inline-block; position: absolute; top: 0; left: 0; background: #FFF; }
+.rgba #preloaderFriends { background: transparentize(#FFF, 0.2); }
 
 /***************************************************
  * View introduction page

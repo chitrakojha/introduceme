@@ -14,7 +14,7 @@ var introduceme = (function (module) {
 	});
 
 	setupHomePage = function () {
-		var friends = [], $friends1, $friends2, friendsAddedToDom = false, introducee1, introducee2, loadFriends, filterFriends, buildFriendSelectors, $filteredFriends;
+		var friends = [], $friends1, $friends2, friendsAddedToDom = false, introducee1, introducee2, loadFriends, filterFriends, buildFriendSelectors, $filteredFriends, preloaderFriends, networksToLoad = [];
 		if (!$body.hasClass("homePage")) {
 			return false;
 		}
@@ -23,6 +23,7 @@ var introduceme = (function (module) {
 
 		loadFriends = function(network) {
 			log('Loading ' + network + ' friends');
+			networksToLoad.push(network);
 			$.ajax({
 				type: "GET",
 				url: "/en/ajax/load-friends/",
@@ -32,6 +33,12 @@ var introduceme = (function (module) {
 				success: function(data) {
 					var callback, link, net, i, len, existing, j, friendsLen;
 					// Response handler
+					for (i = 0, len = networksToLoad.length; i < len; i += 1) {
+						if (networksToLoad[i] === network) {
+							networksToLoad.splice(i, 1);
+							break;
+						}
+					}
 					if (data.result === "false") {
 						if (data.message) {
 							if (data.redirect === "true") {
@@ -67,8 +74,18 @@ var introduceme = (function (module) {
 						}
 						friendsAddedToDom = false;
 					}
+					if (networksToLoad.length === 0) {
+						preloaderFriends.hide();
+					}
 				},
 				error: function(XMLHttpRequest, textStatus, errorThrown) {
+					var i, len;
+					for (i = 0, len = networksToLoad.length; i < len; i += 1) {
+						if (networksToLoad[i] === network) {
+							networksToLoad.splice(i, 1);
+							break;
+						}
+					}
 					// Don't show dialog or it shows even on exit page
 					//module.showDialog(module.content.errorAjaxTitle, module.content.errorAjaxRefresh);
 				}
@@ -220,6 +237,37 @@ var introduceme = (function (module) {
 			});
 		});
 
+		// A preloader for when the friends are loading
+		preloaderFriends = (function() {
+			var $el = $("#preloaderFriends"),
+				text = $el.text(),
+				numDots = 0,
+				i = 1,
+				timeoutId, updateDots;
+
+			// Animate the dots from . to .. and ...
+			updateDots = function() {
+				numDots += i;
+				if (numDots === 3 || numDots === 0) {
+					// Change direction
+					i *= -1;
+				}
+				$el.text(text.replace('SOCIAL_NETWORK_NAME', networksToLoad.join(', ')) + '...'.substr(0, numDots));
+				timeoutId = setTimeout(updateDots, 400);
+			};
+
+			return {
+				show: function() {
+					$el.show();
+					updateDots();
+				},
+				hide: function() {
+					$el.hide();
+					clearTimeout(timeoutId);
+				}
+			};
+		}());
+
 		if (module.personId) {
 			if (module.facebookId) {
 				loadFriends('Facebook');
@@ -230,6 +278,7 @@ var introduceme = (function (module) {
 			if (module.twitterId) {
 				loadFriends('Twitter');
 			}
+			preloaderFriends.show();
 		} else {
 			$(":text, textarea").focus(function() {
 				if (!module.mobile) {
@@ -257,6 +306,7 @@ var introduceme = (function (module) {
 		$("a.help").click(function() {
 			_gaq.push(["_trackPageview", "/index/click-learn-more"]);
 		});
+
 	};
 
 	// Show a dialog window

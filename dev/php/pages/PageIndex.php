@@ -33,7 +33,9 @@ class PageIndex {
 		$top = new Top('', 'homePage');
 		echo $top->getOutput();
 
-		echo '<div id="info">'.
+		echo '<div id="preloaderFriends" style="display: none;">' . Content::c()->home->loading . '</div>'.
+		
+			'<div id="info">'.
 				'<p>'.Content::c()->home->desc.'</p>'.
 			'</div>'.
 
