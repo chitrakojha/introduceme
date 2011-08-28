@@ -1,4 +1,4 @@
-@import "scss-mixins/boilerplate-top.scss";
+@import "top.scss";
 @import "scss-mixins/mixins.scss";
 
 $borderRadius: 5px;
@@ -17,11 +17,14 @@ $narrowWidth: 462px;
  * Common elements
  **************************************************/
 
-body { background: url(/images/header.png) repeat-x #fff 0 0; font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; font-weight: 300; font-size: 14px; }
+body { background: #fff url(/images/header.png) repeat-x 0 0; font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; font-weight: 300; font-size: 14px; }
 
 h1, h2, h3, h4, h5, h6 { color: $darkPurple; }
 h1 { font-size: 19px; margin-bottom: 4px; }
-h2 { margin-bottom: 10px; }
+h2 { font-size: 16px; margin-bottom: 10px; }
+
+a, a:active, a:visited { color: #607890; }
+a:hover { color: #036; }
 
 #main { min-height: 300px; }
 
@@ -36,7 +39,7 @@ a.button {
 
 header {
 	padding: 0 20px; width: $fullWidth; height: 95px; margin: 0 auto; position: relative;
-	h1 { height: 79px; width: 234px; right: 20px; top: 0; position: absolute; background: url(/images/logo.png) no-repeat; }
+	h1 { height: 79px; width: 234px; padding: 0; margin: 0; right: 20px; top: 0; position: absolute; background: url(/images/logo.png) no-repeat; }
 	a { text-decoration: none; }
 	h2 { position: absolute; top: 0; left: 0; }
 }
@@ -281,5 +284,5 @@ input[type="text"], input[type="email"], textarea { width: 260px; padding: 10px;
 	}
 }
 
-@import "scss-mixins/boilerplate-bottom.scss";
+@import "bottom.scss";
 
