@@ -147,14 +147,27 @@ LINK</message>
 	</about>
 
 	<errors>
-		<auth_error>Authentication error</auth_error>
-		<ajax_error>AJAX error</ajax_error>
-		<input_error>Input error</input_error>
-		<unknown_error>An unknown error occurred.</unknown_error>
-		<no_session>No user is logged in.</no_session>
-		<invalid_access_token>The access token for SOCIAL_NETWORK_NAME was not valid. You will be redirected to a page where you can authorize this application again.</invalid_access_token>
-		<introduction_not_created>The introduction was not sent. Have you selected two people to introduce?</introduction_not_created>
-		<introduce_to_self>You cannot introduce somebody to themself. That’s just weird.</introduce_to_self>
+		<ajax>
+			<title>Error communicating with the server</title>
+			<refresh>Please refresh the page and try again.</refresh>
+		</ajax>
+		<input>
+			<title>Input error</title>
+			<introduction_not_created>The introduction was not sent. Have you selected two people to introduce?</introduction_not_created>
+			<introduce_to_self>You cannot introduce somebody to themself. That’s just weird.</introduce_to_self>
+		</input>
+		<unknown>
+			<title>Error</title>
+			<desc>An unknown error occurred.</desc>
+		</unknown>
+		<session>
+			<title>Session error</title>
+			<no_session>No user is logged in.</no_session>
+		</session>
+		<auth>
+			<title>Authentication error</title>
+			<invalid_access_token>The access token for SOCIAL_NETWORK_NAME was not valid. You will be redirected to a page where you can authorize this application again.</invalid_access_token>
+		</auth>
 	</errors>
 
 	<merge_accounts>

@@ -50,8 +50,8 @@ class AjaxLoadFriends {
 		// Make sure a user is logged in
 		if (empty($this->userId)) {
 			$json['result'] = 'false';
-			$json['title'] = (string)Content::c()->errors->ajax_error;
-			$json['message'] = (string)Content::c()->errors->no_session;
+			$json['title'] = (string)Content::c()->errors->session->title;
+			$json['message'] = (string)Content::c()->errors->session->no_session;
 			echo json_encode($json);
 			exit;
 		}
@@ -59,8 +59,8 @@ class AjaxLoadFriends {
 		// Validate input
 		if (empty($_GET['network']) || !in_array($_GET['network'], array('Facebook', 'LinkedIn', 'Twitter'))) {
 			$json['result'] = 'false';
-			$json['title'] = (string)Content::c()->errors->ajax_error;
-			$json['message'] = (string)Content::c()->errors->unknown_error;
+			$json['title'] = (string)Content::c()->errors->unknown->title;
+			$json['message'] = (string)Content::c()->errors->unknown->desc;
 			echo json_encode($json);
 			exit;
 		}
@@ -90,8 +90,8 @@ class AjaxLoadFriends {
 			Debug::l('Access token missing');
 			$json['result'] = 'false';
 			$json['redirect'] = 'true';
-			$json['title'] = (string)Content::c()->errors->auth_error;
-			$json['message'] = str_replace('SOCIAL_NETWORK_NAME', $this->network, Content::c()->errors->invalid_access_token);
+			$json['title'] = (string)Content::c()->errors->auth->title;
+			$json['message'] = str_replace('SOCIAL_NETWORK_NAME', $this->network, Content::c()->errors->auth->invalid_access_token);
 			echo json_encode($json);
 			exit;
 		}
@@ -281,8 +281,8 @@ class AjaxLoadFriends {
 		Debug::l('Error loading '.$this->network.' friends '.$e);
 		$json['result'] = 'false';
 		$json['redirect'] = 'true';
-		$json['title'] = (string)Content::c()->errors->auth_error;
-		$json['message'] = str_replace('SOCIAL_NETWORK_NAME', $this->network, Content::c()->errors->invalid_access_token);
+		$json['title'] = (string)Content::c()->errors->auth->title;
+		$json['message'] = str_replace('SOCIAL_NETWORK_NAME', $this->network, Content::c()->errors->auth->invalid_access_token);
 		echo json_encode($json);
 		exit;
 	}

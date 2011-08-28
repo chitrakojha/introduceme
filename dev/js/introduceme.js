@@ -6,7 +6,7 @@ var introduceme = (function (module) {
 	$(document).ready(function () {
 		$body = $("body");
 		$("time.timeago").timeago();
-		$("input, textarea").placeholder();
+		//$("input, textarea").placeholder();
 
 		setupHomePage();
 		setupSettingsPage();
@@ -70,7 +70,7 @@ var introduceme = (function (module) {
 				},
 				error: function(XMLHttpRequest, textStatus, errorThrown) {
 					// Don't show dialog or it shows even on exit page
-					//module.showDialog('Error loading AJAX', 'Please try again later.');
+					//module.showDialog(module.content.errorAjaxTitle, module.content.errorAjaxRefresh);
 				}
 			});
 		};
@@ -214,7 +214,7 @@ var introduceme = (function (module) {
 					}
 				},
 				error: function(XMLHttpRequest, textStatus, errorThrown) {
-					showDialog('Error loading AJAX', 'Please try again later.', null);
+					showDialog(module.content.errorAjaxTitle, module.content.errorAjaxRefresh, null);
 					$("#submitIntroduce").removeAttr('disabled');
 				}
 			});
@@ -261,7 +261,7 @@ var introduceme = (function (module) {
 
 	// Show a dialog window
 	showDialog = function (title, body, callback) {
-		var result = confirm(title + "\n" + body);
+		var result = confirm(title + "\n\n" + body);
 		if (result === true) {
 			if (typeof callback === "function") {
 				callback();
@@ -289,11 +289,11 @@ var introduceme = (function (module) {
 						$("#email").addClass("invalid");
 					} else {
 						$("#email").removeClass("invalid");
-						module.showDialog(introduceme.content.success, introduceme.content.saved);
+						module.showDialog(module.content.success, module.content.saved);
 					}
 				},
 				error: function(XMLHttpRequest, textStatus, errorThrown) {
-					module.showDialog("Error loading AJAX", "Please try again later.");
+					module.showDialog(module.content.errorAjaxTitle, module.content.errorAjaxRefresh);
 					$("#submitEmail").removeAttr("disabled");
 				}
 			});
@@ -324,7 +324,7 @@ var introduceme = (function (module) {
 					}
 				},
 				error: function(XMLHttpRequest, textStatus, errorThrown) {
-					module.showDialog("Error loading AJAX", "Please try again later.");
+					module.showDialog(module.content.errorAjaxTitle, module.content.errorAjaxRefresh);
 					$("#submitEmail").removeAttr("disabled");
 				}
 			});
@@ -354,7 +354,7 @@ var introduceme = (function (module) {
 					}
 				},
 				error: function(XMLHttpRequest, textStatus, errorThrown) {
-					module.showDialog("Error sending message", "Please try again later.");
+					module.showDialog(module.content.errorAjaxTitle, module.content.errorAjaxRefresh);
 					$("#submitMessage").removeAttr('disabled');
 				}
 			});

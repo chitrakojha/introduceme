@@ -9,7 +9,7 @@ require_once 'php/clients/twitterOAuth.php';
 
 /**
  * This AJAX script will create an introduction.
- * If an access token is invalid, it will return intructions for a Javascript redirect to the Facebook auth page.
+ * If an access token is invalid, it will return instructions for a Javascript redirect to the Facebook auth page.
  */
 class AjaxIntroduce {
 
@@ -26,8 +26,8 @@ class AjaxIntroduce {
 		// Make sure a user is logged in
 		if (!isset($userId)) {
 			$json['result'] = 'false';
-			$json['title'] = (string)Content::c()->errors->ajax_error;
-			$json['message'] = (string)Content::c()->errors->no_session;
+			$json['title'] = (string)Content::c()->errors->session->title;
+			$json['message'] = (string)Content::c()->errors->session->no_session;
 			echo json_encode($json);
 			exit;
 		}
@@ -36,8 +36,8 @@ class AjaxIntroduce {
 		if (empty($_POST['introducee1Name']) || (empty($_POST['introducee1FacebookId']) && empty($_POST['introducee1LinkedInId']) && empty($_POST['introducee1TwitterId'])) || 
 		empty($_POST['introducee2Name']) || (empty($_POST['introducee2FacebookId']) && empty($_POST['introducee2LinkedInId']) && empty($_POST['introducee2TwitterId']))) {
 			$json['result'] = 'false';
-			$json['title'] = (string)Content::c()->errors->input_error;
-			$json['message'] = (string)Content::c()->errors->introduction_not_created;
+			$json['title'] = (string)Content::c()->errors->input->title;
+			$json['message'] = (string)Content::c()->errors->input->introduction_not_created;
 			echo json_encode($json);
 			exit;
 		}
@@ -49,8 +49,8 @@ class AjaxIntroduce {
 			(!empty($_POST['introducee1TwitterId']) && !empty($_POST['introducee2TwitterId']) && $_POST['introducee1TwitterId'] == $_POST['introducee2TwitterId'])
 		) {
 			$json['result'] = 'false';
-			$json['title'] = (string)Content::c()->errors->input_error;
-			$json['message'] = (string)Content::c()->errors->introduce_to_self;
+			$json['title'] = (string)Content::c()->errors->input->title;
+			$json['message'] = (string)Content::c()->errors->input->introduce_to_self;
 			echo json_encode($json);
 			exit;
 		}
@@ -94,8 +94,8 @@ class AjaxIntroduce {
 			($introducee1->getTwitterId() != null && $introducee1->getTwitterId() == $introducee2->getTwitterId())
 		) {
 			$json['result'] = 'false';
-			$json['title'] = (string)Content::c()->errors->input_error;
-			$json['message'] = (string)Content::c()->errors->introduce_to_self;
+			$json['title'] = (string)Content::c()->errors->input->title;
+			$json['message'] = (string)Content::c()->errors->input->introduce_to_self;
 			echo json_encode($json);
 			exit;
 		}

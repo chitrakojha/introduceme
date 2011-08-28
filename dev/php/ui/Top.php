@@ -23,6 +23,9 @@ class Top {
 				'<script>'.
 					'var introduceme = (function (module) {'.
 						'module.mobile = Modernizr.mq("only all and (max-width: 640px)");'.
+						'module.content = module.content || {};'.
+						'module.content.errorAjaxTitle = "' . htmlentities(Content::c()->errors->ajax->title , ENT_QUOTES, 'UTF-8') . '";'.
+						'module.content.errorAjaxRefresh = "' . htmlentities(Content::c()->errors->ajax->refresh , ENT_QUOTES, 'UTF-8') . '";'.
 						'return module;'.
 					'}(introduceme || {}));'.
 				'</script>'.
