@@ -10,7 +10,7 @@ window.log = function () {
 
 // Log errors with a web service
 window.onerror = function(message, file, line) {
-	new Image().src = 'http://logger-keegan.dotcloud.com/log/'
+	new Image().src = 'http://logger.nodester.com/log/'
 	+ '?project=' + encodeURIComponent('introduceme')
 	+ '&file=' + encodeURIComponent(file)
 	+ '&line=' + encodeURIComponent(line)
