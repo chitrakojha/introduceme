@@ -106,18 +106,16 @@ var introduceme = (function (module) {
 				buildFriendSelectors();
 			}
 			if (input.length < 3) {
-				if ($output) {
-					$output.removeClass("filtered");
-					$output.parent().hide();
-				}
+				$output.removeClass("filtered");
+				$output.parent().hide();
 				return;
 			}
 			input = input.toUpperCase();
 			for (i = 0, len = friends.length; i < len; i += 1) {
 				if (friends[i].nameUpperCase.indexOf(input) === -1) {
-					$($output[i]).addClass("filtered");
+					$output.eq(i).addClass("filtered");
 				} else {
-					$($output[i]).removeClass("filtered");
+					$output.eq(i).removeClass("filtered");
 					matchFound = true;
 				}
 			}
@@ -162,8 +160,8 @@ var introduceme = (function (module) {
 				html += '</li>';
 			}
 			$filteredFriends.html(html);
-			$friends1 = $($filteredFriends[0]).children();
-			$friends2 = $($filteredFriends[1]).children();
+			$friends1 = $filteredFriends.eq(0).children();
+			$friends2 = $filteredFriends.eq(1).children();
 			$friends1.click(function (e) {
 				e.preventDefault();
 				introducee1 = friends[$(this).index()];
